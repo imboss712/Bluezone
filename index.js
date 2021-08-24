@@ -40,10 +40,6 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
   app.get('*', (req, res) => {
-    res.setHeader(
-      'Content-Security-Policy',
-      "default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline'  'unsafe-hashes' 'unsafe-eval'; img-src * data: 'unsafe-inline'; connect-src * 'unsafe-inline'; frame-src *;"
-    );
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
