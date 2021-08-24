@@ -54,7 +54,7 @@
     "mongoose": "5.13.7",
     "multer": "1.4.3",
     "nanoid": "3.1.25",
-    "normalize-url": "5.1.0",
+    "normalize-url": "5.3.1",
     "razorpay": "2.0.6",
     "twilio": "3.67.0",
     "validator": "13.6.0",
