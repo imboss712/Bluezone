@@ -1,0 +1,82 @@
+// Alert
+export const SET_ALERT = 'SET_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';
+
+// Auth
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAIL = 'REGISTER_FAIL';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const RESEND_CODE = 'RESEND_CODE';
+export const VERIFY_USER = 'VERIFY_USER';
+export const VERIFY_FAIL = 'VERIFY_FAIL';
+export const SET_PROFILE_TRUE = 'SET_PROFILE_TRUE';
+export const SET_AVATAR_TRUE = 'SET_AVATAR_TRUE';
+export const SET_AVATAR_FALSE = 'SET_AVATAR_FALSE';
+export const GET_USER = 'GET_USER';
+export const UPDATE_USER = 'UPDATE_USER';
+export const DELETE_USER = 'DELETE_USER';
+export const USER_ERROR = 'USER_ERROR';
+export const LOGOUT = 'LOGOUT';
+export const LOGOUT_ALL = 'LOGOUT_ALL';
+
+// Wallet
+export const ADD_AMOUNT = 'ADD_AMOUNT';
+export const REQUEST_AMOUNT = 'REQUEST_AMOUNT';
+
+// Profile
+export const GET_PROFILE = 'GET_PROFILE';
+export const CREATE_PROFILE = 'CREATE_PROFILE';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const GET_AVATAR = 'GET_AVATAR';
+export const UPLOAD_AVATAR = 'UPLOAD_AVATAR';
+export const DELETE_AVATAR = 'DELETE_AVATAR';
+export const PROFILE_ERROR = 'PROFILE_ERROR';
+export const AVATAR_ERROR = 'AVATAR_ERROR';
+
+// Match
+export const GET_MATCH = 'GET_MATCH';
+export const GET_MATCHES = 'GET_MATCHES';
+export const GET_OWN_MATCHES = 'GET_OWN_MATCHES';
+export const CREATE_MATCH = 'CREATE_MATCH';
+export const UPDATE_MATCH = 'UPDATE_MATCH';
+export const DELETE_MATCH = 'DELETE_MATCH';
+export const SEND_ROOM_ID_PWD = 'SEND_ROOM_ID_PWD';
+export const CHANGE_MATCH_STATUS = 'CHANGE_MATCH_STATUS';
+export const MATCH_ERROR = 'MATCH_ERROR';
+export const MATCHES_ERROR = 'MATCHES_ERROR';
+export const MY_MATCHES_ERROR = 'MY_MATCHES_ERROR';
+export const SORT_BY_DATE = 'SORT_BY_DATE';
+export const SORT_BY_ENTRY = 'SORT_BY_ENTRY';
+export const INCREASE_PARTICIPANT_COUNT = 'INCREASE_PARTICIPANT_COUNT';
+export const DECREASE_PARTICIPANT_COUNT = 'DECREASE_PARTICIPANT_COUNT';
+
+// Team
+export const CREATE_TEAM = 'CREATE_TEAM';
+export const JOIN_TEAM = 'JOIN_TEAM';
+export const REMOVE_TEAM = 'REMOVE_TEAM';
+export const LEAVE_TEAM = 'LEAVE_TEAM';
+export const KICK_TEAMMATE = 'KICK_TEAMMATE';
+export const GET_ALL_TEAM = 'GET_ALL_TEAM';
+export const GET_TEAM = 'GET_TEAM';
+export const TEAM_ERROR = 'TEAM_ERROR';
+export const TEAMS_ERROR = 'TEAMS_ERROR';
+
+// Transaction
+export const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
+export const GET_PAYOUTS = 'GET_PAYOUTS';
+export const TRANSACTIONS_ERROR = 'TRANSACTIONS_ERROR';
+export const PAYOUTS_ERROR = 'PAYOUTS_ERROR';
+export const ADD_DEPOSIT_TRANSACTION = 'ADD_DEPOSIT_TRANSACTION';
+export const ADD_WITHDRAWAL_TRANSACTION = 'ADD_WITHDRAWAL_TRANSACTION';
+
+// Payout
+export const GET_PAYOUT_REQUESTS = 'GET_PAYOUT_REQUESTS';
+export const PAYOUT_REQUESTS_ERROR = 'PAYOUT_REQUESTS_ERROR';
+export const SEND_PAYOUT_LINK = 'SEND_PAYOUT_LINK';
+export const SEND_PAYOUT_ERROR = 'SEND_PAYOUT_ERROR';
+
+// Feedback
+export const CREATE_FEEDBACK = 'CREATE_FEEDBACK';
+export const GET_FEEDBACKS = 'GET_FEEDBACKS';
+export const FEEDBACKS_ERROR = 'FEEDBACKS_ERROR';
