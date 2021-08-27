@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false, limit: '20kb' }));
 app.use(
   helmet({
     contentSecurityPolicy: {
-      useDefaults: true,
+      useDefaults: false,
       directives: {
         defaultSrc: ["'self'"],
         fontSrc: ["'self'", 'https://fonts.gstatic.com', "'unsafe-inline'"],
@@ -52,7 +52,10 @@ app.use(
           'https://fonts.gstatic.com',
           "'unsafe-inline'"
         ],
-        connectSrc: ['*', "'unsafe-inline'"]
+        connectSrc: ['*', "'unsafe-inline'"],
+        objectSrc: ['*', "'unsafe-inline'"],
+        mediaSrc: ['*', "'unsafe-inline'"],
+        frameAncestors: ["'self'"]
       }
     }
   })
