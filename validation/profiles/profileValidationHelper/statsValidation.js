@@ -5,7 +5,8 @@ const mapRegex = /^(Erangel|Miramar|Sanhok)$/;
 const serverRegex = /^India$/;
 const perspectiveRegex = /^(FPP|TPP)$/;
 const teamTypeRegex = /^(Solo|Duo|Squad)$/;
-const tierValueRegex = /^(Bronze|Silver|Gold|Platinum|Diamond|Crown|Ace|Ace Master|Ace Dominator|Conqueror)$/;
+const tierValueRegex =
+  /^(Bronze|Silver|Gold|Platinum|Diamond|Crown|Ace|Ace Master|Ace Dominator|Conqueror)$/;
 
 const statsInput = (input) => {
   const errors = [];

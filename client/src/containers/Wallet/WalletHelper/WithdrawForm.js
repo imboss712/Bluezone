@@ -69,10 +69,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submitBtn: {
     display: 'flex',
-    justifyContent: 'flex-end',
-    [theme.breakpoints.down('xs')]: {
-      justifyContent: 'center'
-    }
+    justifyContent: 'flex-end'
   }
 }));
 

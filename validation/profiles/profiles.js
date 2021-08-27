@@ -7,16 +7,8 @@ const { socialInput } = require('./profileValidationHelper/socialValidation');
 
 // Create profile validation
 const profileValidation = (input) => {
-  const {
-    gameName,
-    gameId,
-    bio,
-    role,
-    favoriteGun,
-    stats,
-    address,
-    social
-  } = input;
+  const { gameName, gameId, bio, role, favoriteGun, stats, address, social } =
+    input;
 
   const { genralErrors } = genralInput({
     gameName,

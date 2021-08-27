@@ -6,6 +6,7 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
+// Get last 20 transactions
 router.get('/', auth, async (req, res) => {
   try {
     const transactions = await Transaction.find({ user: req.user._id })

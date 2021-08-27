@@ -198,7 +198,7 @@ const ContactUs = () => {
                 aria-label="bluezone-instagram"
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://www.instagram.com/bluezone.india/"
+                href="https://www.instagram.com/bluezone.fun/"
                 className={classes.socialIcon}
               >
                 <InstagramIcon style={{ color: '#bc2a8d', fontSize: '28px' }} />

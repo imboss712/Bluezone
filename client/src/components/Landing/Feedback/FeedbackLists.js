@@ -15,8 +15,8 @@ const FeedbackLists = [
   },
   {
     _id: 3,
-    name: 'Akash Narayan',
-    address: { city: 'Darbhanga', state: 'Bihar' },
+    name: 'Dheeraj Patel',
+    address: { city: 'Jaunpur', state: 'Uttar Pradesh' },
     feedback:
       'Withdrawing money is very easy as you can withdraw your winnings to UPI, mobile wallet, or bank account without having to submit your bank details as they send your payments through the payout link.'
   }

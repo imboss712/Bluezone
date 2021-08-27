@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { nanoid } = require('nanoid');
+const { format } = require('date-fns');
 
 const User = require('../models/User');
 const Match = require('../models/Match');
@@ -27,6 +28,8 @@ const nonSchemaId = (id) => new mongoose.Types.ObjectId(id);
 router.post('/matches/:id/create-team', auth, isHonest, async (req, res) => {
   try {
     const match = await Match.findById(req.params.id).select({
+      matchDate: 1,
+      matchTime: 1,
       teamType: 1,
       entryFees: 1,
       participantStatus: 1,
@@ -55,11 +58,9 @@ router.post('/matches/:id/create-team', auth, isHonest, async (req, res) => {
     const teams = await Team.find({ match: match._id })
       .select({ players: 1 })
       .lean();
-    teams.forEach((team) => {
-      return team.players.forEach((player) => {
-        return players.push(player.playerId.toString());
-      });
-    });
+    teams.forEach((team) =>
+      team.players.forEach((player) => players.push(player.playerId.toString()))
+    );
 
     if (players.includes(req.user._id.toString())) {
       return res.status(404).send({
@@ -107,7 +108,18 @@ router.post('/matches/:id/create-team', auth, isHonest, async (req, res) => {
 
     req.user.amount -= match.entryFees;
 
-    sendMatchJoinMsg(req.user.phone, req.user.name);
+    const newMatchDate = format(new Date(match.matchDate), 'yyyy-MM-dd');
+    const newMatchTime = `${newMatchDate} ${match.matchTime}`;
+
+    const formattedMatchDate = format(new Date(newMatchDate), 'dd MMM yyyy');
+    const formattedMatchTime = format(new Date(newMatchTime), 'hh:mm aa');
+
+    sendMatchJoinMsg(
+      req.user.phone,
+      req.user.name,
+      formattedMatchDate,
+      formattedMatchTime
+    );
 
     match.participants += 1;
 
@@ -204,6 +216,8 @@ router.post('/matches/:id/join-team', auth, isHonest, async (req, res) => {
 
   try {
     const match = await Match.findById(req.params.id).select({
+      matchDate: 1,
+      matchTime: 1,
       teamType: 1,
       entryFees: 1,
       participantStatus: 1,
@@ -239,11 +253,9 @@ router.post('/matches/:id/join-team', auth, isHonest, async (req, res) => {
     const teams = await Team.find({ match: match._id })
       .select({ players: 1 })
       .lean();
-    teams.forEach((t) => {
-      return t.players.forEach((p) => {
-        return players.push(p.playerId.toString());
-      });
-    });
+    teams.forEach((t) =>
+      t.players.forEach((p) => players.push(p.playerId.toString()))
+    );
 
     if (players.includes(req.user._id.toString())) {
       return res.status(404).send({
@@ -276,7 +288,18 @@ router.post('/matches/:id/join-team', auth, isHonest, async (req, res) => {
     team.players = team.players.concat(player);
     req.user.amount -= match.entryFees;
 
-    sendMatchJoinMsg(req.user.phone, req.user.name);
+    const newMatchDate = format(new Date(match.matchDate), 'yyyy-MM-dd');
+    const newMatchTime = `${newMatchDate} ${match.matchTime}`;
+
+    const formattedMatchDate = format(new Date(newMatchDate), 'dd MMM yyyy');
+    const formattedMatchTime = format(new Date(newMatchTime), 'hh:mm aa');
+
+    sendMatchJoinMsg(
+      req.user.phone,
+      req.user.name,
+      formattedMatchDate,
+      formattedMatchTime
+    );
 
     match.participants += 1;
 

@@ -45,9 +45,9 @@ const sendMatchJoinMsg = (phone, name, date, time) => {
 const sendMatchIdPwd = (phones, id, pwd) => {
   const service = client.notify.services(notifyServiceSid);
 
-  const bindings = phones.map((phone) => {
-    return JSON.stringify({ binding_type: 'sms', address: `+91${phone}` });
-  });
+  const bindings = phones.map((phone) =>
+    JSON.stringify({ binding_type: 'sms', address: `+91${phone}` })
+  );
 
   const body = `Hello player, Join the tournament as soon as possible. Your Room ID: ${id} & Password: ${pwd}. The tournament will start within 5 minutes. Do not share Room ID and Password with anyone.`;
 

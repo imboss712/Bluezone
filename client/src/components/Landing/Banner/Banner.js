@@ -57,7 +57,7 @@ const Banner = () => {
           And Earn Real Money
         </Typography>
 
-        <Link to="/tournaments" className={classes.linkBtn}>
+        <Link to="/register" className={classes.linkBtn}>
           <Button
             className={classes.buttonBottom}
             size="large"

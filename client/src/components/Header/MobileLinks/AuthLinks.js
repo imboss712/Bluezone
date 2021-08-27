@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,7 +18,6 @@ import * as actions from '../../../store/actions/index';
 
 import AdminLinks from './AdminLinks';
 // import AllLinks from './AllLinks';
-import Modal from '../../Modal/Modal';
 
 const useStyles = makeStyles((theme) => ({
   btnLink: {
@@ -33,43 +32,18 @@ const useStyles = makeStyles((theme) => ({
 const AuthLinks = (props) => {
   const classes = useStyles();
 
-  const modalRef = useRef();
-
   const {
     auth: { isAuthenticated, user },
     onLogout,
     onLogoutAll
   } = props;
 
-  const [modalProps, setModalProps] = useState({
-    title: '',
-    content: '',
-    confirmText: 'OK',
-    onConfirmClick: () => console.log('OK')
-  });
-
   const handleLogout = () => {
-    modalRef.current.openModal();
-    setModalProps({
-      title: 'Logout',
-      content: 'You will be logged out from this device only.',
-      confirmText: 'Logout',
-      onConfirmClick: () => {
-        onLogout();
-      }
-    });
+    onLogout();
   };
 
   const handleLogoutAll = () => {
-    modalRef.current.openModal();
-    setModalProps({
-      title: 'Logout All',
-      content: 'You will be logged out from all devices.',
-      confirmText: 'Logout All',
-      onConfirmClick: () => {
-        onLogoutAll();
-      }
-    });
+    onLogoutAll();
   };
 
   return (
@@ -144,15 +118,6 @@ const AuthLinks = (props) => {
           <ListItemText primary="Logout All" />
         </ListItem>
       </div>
-
-      <Modal
-        ref={modalRef}
-        title={modalProps.title}
-        confirmText={modalProps.confirmText}
-        onConfirmClick={modalProps.onConfirmClick}
-      >
-        {modalProps.content}
-      </Modal>
     </>
   );
 };

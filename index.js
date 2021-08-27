@@ -24,7 +24,36 @@ app.use(express.json({ limit: '20kb' }));
 app.use(express.urlencoded({ extended: false, limit: '20kb' }));
 app.use(
   helmet({
-    contentSecurityPolicy: false
+    contentSecurityPolicy: {
+      useDefaults: true,
+      directives: {
+        defaultSrc: ["'self'"],
+        fontSrc: ["'self'", 'https://fonts.gstatic.com', "'unsafe-inline'"],
+        imgSrc: [
+          "'self'",
+          'https://bluezone-assets.s3.ap-south-1.amazonaws.com',
+          'data:',
+          'blob:',
+          "'unsafe-inline'"
+        ],
+        scriptSrc: [
+          "'self'",
+          'https://fonts.googleapis.com',
+          'https://fonts.gstatic.com',
+          'https://checkout.razorpay.com',
+          "'unsafe-inline'",
+          "'unsafe-eval'"
+        ],
+        scriptSrcAttr: ["'unsafe-inline'"],
+        styleSrc: ["'self'", 'https://fonts.googleapis.com', "'unsafe-inline'"],
+        frameSrc: ['https://api.razorpay.com', "'unsafe-inline'"],
+        prefetchSrc: [
+          'https://fonts.googleapis.com',
+          'https://fonts.gstatic.com',
+          "'unsafe-inline'"
+        ]
+      }
+    }
   })
 );
 app.use(cors());

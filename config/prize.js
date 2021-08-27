@@ -86,8 +86,6 @@ const positionPrizeList = (teamType, teams, participants, entryFees) => {
   return prizeList;
 };
 
-const killPrize = (kills, entryFees) => {
-  return kills * entryFees * 0.2;
-};
+const killPrize = (kills, entryFees) => kills * entryFees * 0.2;
 
 module.exports = { positionPrizeList, killPrize };

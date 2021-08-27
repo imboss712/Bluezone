@@ -414,9 +414,9 @@ router.delete('/me', auth, async (req, res) => {
           const player = team.players.find(
             (p) => p.playerId.toString() === req.user._id.toString()
           );
-          team.players = team.players.filter((p) => {
-            return p.playerId.toString() !== req.user._id.toString();
-          });
+          team.players = team.players.filter(
+            (p) => p.playerId.toString() !== req.user._id.toString()
+          );
           if (team.players.length === 0) {
             await Team.deleteOne({ _id: team._id });
           } else {

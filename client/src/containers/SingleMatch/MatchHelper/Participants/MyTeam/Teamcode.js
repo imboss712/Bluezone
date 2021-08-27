@@ -32,7 +32,7 @@ const Teamcode = (props) => {
 
   const copyTeamcode = () => {
     const el = document.createElement('textarea');
-    el.value = `Hello friend, You can join my team to play Battlegrounds Mobile India tournament and earn money. First browse the tournament on ${window.location.href} and then enter the teamcode: ${teamCode} to join my team to participate in the tournament.`;
+    el.value = `Hello friend, Join my team to play Battlegrounds Mobile India tournament. Visit this link ${window.location.href} and enter the teamcode: ${teamCode} to participate.`;
     el.setAttribute('readonly', '');
     el.style.position = 'absolute';
     el.style.left = '-9999px';

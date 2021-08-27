@@ -7,6 +7,7 @@ const authAdmin = require('../middleware/authAdmin');
 
 const router = express.Router();
 
+// Create feedback
 router.post('/', async (req, res) => {
   const { satisfy, title, reason, suggestion } = req.body;
 
@@ -20,6 +21,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+// Read last 20 feedbacks (Admin Route)
 router.get('/', auth, authAdmin, async (req, res) => {
   try {
     const feedbacks = await Feedback.find()

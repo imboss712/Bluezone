@@ -45,7 +45,7 @@ const ShareMatch = () => {
         name="sharematch"
         rows="4"
         readOnly
-        value={`Hello friends, I have got a Battlegrounds Mobile India Tournament at Bluezone. You can join the tournament by clicking on ${window.location.href} and can earn real money.`}
+        value={`Hello friends, Join Battlegrounds Mobile India Tournament at ${window.location.href} and earn real money.`}
       />
 
       <Box className={classes.buttonBox}>
