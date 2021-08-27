@@ -48,6 +48,7 @@ app.use(
         styleSrc: ["'self'", 'https://fonts.googleapis.com', "'unsafe-inline'"],
         frameSrc: ['https://api.razorpay.com', "'unsafe-inline'"],
         prefetchSrc: [
+          'self',
           'https://fonts.googleapis.com',
           'https://fonts.gstatic.com',
           "'unsafe-inline'"
