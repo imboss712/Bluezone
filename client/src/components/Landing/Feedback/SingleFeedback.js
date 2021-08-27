@@ -10,9 +10,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(0.8, 1.75),
     maxWidth: 380
-  },
-  avatar: {
-    backgroundColor: '#3f51b5'
   }
 }));
 
@@ -22,6 +19,7 @@ const SingleFeedback = (props) => {
   const {
     feedback: {
       name,
+      image,
       address: { city, state },
       feedback
     }
@@ -30,11 +28,7 @@ const SingleFeedback = (props) => {
   return (
     <Card className={classes.root} variant="outlined">
       <CardHeader
-        avatar={
-          <Avatar aria-label="name" alt={name} className={classes.avatar}>
-            {name.charAt(0).toUpperCase()}
-          </Avatar>
-        }
+        avatar={<Avatar aria-label="avatar" alt={name} src={image} />}
         title={name}
         subheader={`${city}, ${state}`}
       />

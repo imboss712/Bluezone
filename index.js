@@ -51,7 +51,8 @@ app.use(
           'https://fonts.googleapis.com',
           'https://fonts.gstatic.com',
           "'unsafe-inline'"
-        ]
+        ],
+        connectSrc: ['*', "'unsafe-inline'"]
       }
     }
   })
