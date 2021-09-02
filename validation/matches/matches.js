@@ -1,5 +1,6 @@
 const isEmpty = require('is-empty');
 
+const { titleInput } = require('./matchValidationHelper/titleValidation');
 const {
   matchDateInput
 } = require('./matchValidationHelper/matchDateValidation');
@@ -16,6 +17,7 @@ const { entryInput } = require('./matchValidationHelper/entryValidation');
 
 // Create match validation
 const validateCreateMatchInput = (input) => {
+  const { titleErrors } = titleInput(input.title);
   const { matchDateErrors } = matchDateInput(input.matchDate);
   const { matchTimeErrors } = matchTimeInput(input.matchTime);
   const { teamTypeErrors } = teamTypeInput(input.teamType);
@@ -25,6 +27,7 @@ const validateCreateMatchInput = (input) => {
   const { entryErrors } = entryInput(input.entryFees);
 
   const errors = [
+    ...titleErrors,
     ...matchDateErrors,
     ...matchTimeErrors,
     ...teamTypeErrors,

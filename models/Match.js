@@ -2,6 +2,13 @@ const mongoose = require('mongoose');
 
 const matchSchema = new mongoose.Schema(
   {
+    title: {
+      type: String,
+      minLength: 10,
+      maxLength: 28,
+      required: true,
+      trim: true
+    },
     map: {
       type: String,
       enum: ['Erangel', 'Miramar', 'Sanhok'],

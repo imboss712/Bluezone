@@ -12,6 +12,7 @@ const CreateMatch = (props) => {
   const { history, onCreate } = props;
 
   const initialValues = {
+    title: '',
     matchDate: null,
     matchTime: null,
     teamType: 'Squad',

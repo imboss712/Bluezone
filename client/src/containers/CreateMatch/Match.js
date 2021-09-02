@@ -98,6 +98,7 @@ const Match = (props) => {
           <Formik
             initialValues={initialValues}
             validationSchema={Yup.object({
+              title: Yup.string().required('Required').min(15).max(28),
               matchDate: Yup.date().required('Required'),
               matchTime: Yup.date().required('Required'),
               teamType: Yup.string()
@@ -133,6 +134,19 @@ const Match = (props) => {
                       spacing={3}
                       style={{ justifyContent: 'space-around' }}
                     >
+                      <Grid item xs={12}>
+                        <Field
+                          component={TextField}
+                          variant="outlined"
+                          name="title"
+                          type="text"
+                          label="Title"
+                          autoComplete="off"
+                          disabled={isSubmitting || edit ? true : false}
+                          fullWidth
+                        />
+                      </Grid>
+
                       <Grid item xs={12} sm={6}>
                         <Field
                           component={KeyboardDatePicker}

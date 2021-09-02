@@ -17,6 +17,13 @@ const useStyles = makeStyles((theme) => ({
   box: {
     flexGrow: 1
   },
+  title: {
+    color: '#FFFFFF',
+    textAlign: 'center',
+    margin: theme.spacing(0.65, 0, 2.6, 0),
+    letterSpacing: theme.spacing(0.05),
+    fontSize: theme.spacing(3)
+  },
   datagrid: {
     padding: theme.spacing(1.5, 0),
     textAlign: 'center'
@@ -44,6 +51,7 @@ const MatchInfo = memo((props) => {
   const classes = useStyles();
 
   const {
+    title,
     matchTime,
     matchDate,
     teamType,
@@ -63,6 +71,8 @@ const MatchInfo = memo((props) => {
   return (
     <Paper className={classes.paper} elevation={0}>
       <Container>
+        <Typography className={classes.title}>{title}</Typography>
+
         <Grid container spacing={4} alignItems="center">
           <Grid item xs={6} sm={4} md={3} className={classes.box}>
             <DataGrid title="Date" value={formattedMatchDate} />

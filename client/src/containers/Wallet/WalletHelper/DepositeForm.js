@@ -148,7 +148,7 @@ const DepositeForm = (props) => {
     }
 
     const options = {
-      key: 'rzp_test_ofSNHjBAHQq8kL',
+      key: 'rzp_live_oDEatRjEerWXPW',
       amount: order.amount,
       currency: order.currency,
       name: 'Bluezone',

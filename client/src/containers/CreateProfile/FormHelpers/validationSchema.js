@@ -13,7 +13,7 @@ const validationSchema = [
   Yup.object({
     gameName: Yup.string().required('Required'),
     gameId: Yup.number('Must be a number type').required('Required'),
-    bio: Yup.string().required('Required'),
+    bio: Yup.string().required('Required').max(70),
     role: Yup.string()
       .required('Required')
       .oneOf(roleItems.map((r) => r.value)),

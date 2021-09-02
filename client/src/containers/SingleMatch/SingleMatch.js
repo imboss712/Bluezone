@@ -135,6 +135,7 @@ const SingleMatch = (props) => {
           </Container>
 
           <MatchInfo
+            title={tournament.title}
             matchTime={tournament.matchTime}
             matchDate={tournament.matchDate}
             teamType={tournament.teamType}

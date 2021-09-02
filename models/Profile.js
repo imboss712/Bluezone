@@ -16,7 +16,7 @@ const profileSchema = new mongoose.Schema(
     },
     bio: {
       type: String,
-      max: 70,
+      maxlength: 70,
       required: true,
       trim: true
     },
