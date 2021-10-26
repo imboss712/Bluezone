@@ -15,6 +15,8 @@ const isHonest = require('../middleware/isHonest');
 const { validateTeamcodeInput } = require('../validation/teams/teams');
 const { positionPrizeList, killPrize } = require('../config/prize');
 
+const { teamQueryOption } = require('../utils/teamQueryOption');
+
 const {
   sendMatchJoinMsg
   // sendMatchResult
@@ -146,57 +148,7 @@ router.post('/matches/:id/create-team', auth, isHonest, async (req, res) => {
           match: nonSchemaId(match._id)
         }
       },
-      { $unwind: '$players' },
-      {
-        $lookup: {
-          from: 'profiles',
-          localField: 'players.playerId',
-          foreignField: 'user',
-          as: 'players.profile'
-        }
-      },
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'players.playerId',
-          foreignField: '_id',
-          as: 'players.info'
-        }
-      },
-      {
-        $project: {
-          position: 1,
-          teamCode: 1,
-          match: 1,
-          'players.kill': 1,
-          'players.playerId': 1,
-          'players.label': 1,
-          'players.profile.avatar': 1,
-          'players.profile.gameName': 1,
-          'players.info.name': 1,
-          'players.profile.bio': 1,
-          'players.profile.stats.tierValue': 1,
-          'players.profile.stats.season': 1,
-          'players.profile.address.city': 1,
-          'players.profile.address.district': 1,
-          'players.profile.address.state': 1
-        }
-      },
-      { $unwind: '$players.profile' },
-      { $unwind: '$players.info' },
-      {
-        $group: {
-          _id: {
-            teamId: '$_id',
-            teamCode: '$teamCode',
-            match: '$match',
-            position: '$position'
-          },
-          players: {
-            $push: '$players'
-          }
-        }
-      }
+      ...teamQueryOption
     ]);
 
     res.send(teamWithProfile);
@@ -326,57 +278,7 @@ router.post('/matches/:id/join-team', auth, isHonest, async (req, res) => {
           match: nonSchemaId(match._id)
         }
       },
-      { $unwind: '$players' },
-      {
-        $lookup: {
-          from: 'profiles',
-          localField: 'players.playerId',
-          foreignField: 'user',
-          as: 'players.profile'
-        }
-      },
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'players.playerId',
-          foreignField: '_id',
-          as: 'players.info'
-        }
-      },
-      {
-        $project: {
-          position: 1,
-          teamCode: 1,
-          match: 1,
-          'players.kill': 1,
-          'players.playerId': 1,
-          'players.label': 1,
-          'players.profile.avatar': 1,
-          'players.profile.gameName': 1,
-          'players.info.name': 1,
-          'players.profile.bio': 1,
-          'players.profile.stats.tierValue': 1,
-          'players.profile.stats.season': 1,
-          'players.profile.address.city': 1,
-          'players.profile.address.district': 1,
-          'players.profile.address.state': 1
-        }
-      },
-      { $unwind: '$players.profile' },
-      { $unwind: '$players.info' },
-      {
-        $group: {
-          _id: {
-            teamId: '$_id',
-            teamCode: '$teamCode',
-            match: '$match',
-            position: '$position'
-          },
-          players: {
-            $push: '$players'
-          }
-        }
-      }
+      ...teamQueryOption
     ]);
 
     res.send(teamWithProfile);
@@ -529,57 +431,7 @@ router.post('/matches/:id/leave-team', auth, isHonest, async (req, res) => {
           match: nonSchemaId(match._id)
         }
       },
-      { $unwind: '$players' },
-      {
-        $lookup: {
-          from: 'profiles',
-          localField: 'players.playerId',
-          foreignField: 'user',
-          as: 'players.profile'
-        }
-      },
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'players.playerId',
-          foreignField: '_id',
-          as: 'players.info'
-        }
-      },
-      {
-        $project: {
-          position: 1,
-          teamCode: 1,
-          match: 1,
-          'players.kill': 1,
-          'players.playerId': 1,
-          'players.label': 1,
-          'players.profile.avatar': 1,
-          'players.profile.gameName': 1,
-          'players.info.name': 1,
-          'players.profile.bio': 1,
-          'players.profile.stats.tierValue': 1,
-          'players.profile.stats.season': 1,
-          'players.profile.address.city': 1,
-          'players.profile.address.district': 1,
-          'players.profile.address.state': 1
-        }
-      },
-      { $unwind: '$players.profile' },
-      { $unwind: '$players.info' },
-      {
-        $group: {
-          _id: {
-            teamId: '$_id',
-            teamCode: '$teamCode',
-            match: '$match',
-            position: '$position'
-          },
-          players: {
-            $push: '$players'
-          }
-        }
-      }
+      ...teamQueryOption
     ]);
     res.send(teamWithProfile);
   } catch (err) {
@@ -674,57 +526,7 @@ router.post(
             match: nonSchemaId(match._id)
           }
         },
-        { $unwind: '$players' },
-        {
-          $lookup: {
-            from: 'profiles',
-            localField: 'players.playerId',
-            foreignField: 'user',
-            as: 'players.profile'
-          }
-        },
-        {
-          $lookup: {
-            from: 'users',
-            localField: 'players.playerId',
-            foreignField: '_id',
-            as: 'players.info'
-          }
-        },
-        {
-          $project: {
-            position: 1,
-            teamCode: 1,
-            match: 1,
-            'players.kill': 1,
-            'players.playerId': 1,
-            'players.label': 1,
-            'players.profile.avatar': 1,
-            'players.profile.gameName': 1,
-            'players.info.name': 1,
-            'players.profile.bio': 1,
-            'players.profile.stats.tierValue': 1,
-            'players.profile.stats.season': 1,
-            'players.profile.address.city': 1,
-            'players.profile.address.district': 1,
-            'players.profile.address.state': 1
-          }
-        },
-        { $unwind: '$players.profile' },
-        { $unwind: '$players.info' },
-        {
-          $group: {
-            _id: {
-              teamId: '$_id',
-              teamCode: '$teamCode',
-              match: '$match',
-              position: '$position'
-            },
-            players: {
-              $push: '$players'
-            }
-          }
-        }
+        ...teamQueryOption
       ]);
 
       res.send(teamWithProfile);
@@ -747,56 +549,7 @@ router.get('/matches/:id/teams', auth, async (req, res) => {
 
     const teams = await Team.aggregate([
       { $match: { match: nonSchemaId(match._id) } },
-      { $unwind: '$players' },
-      {
-        $lookup: {
-          from: 'profiles',
-          localField: 'players.playerId',
-          foreignField: 'user',
-          as: 'players.profile'
-        }
-      },
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'players.playerId',
-          foreignField: '_id',
-          as: 'players.info'
-        }
-      },
-      {
-        $project: {
-          position: 1,
-          match: 1,
-          'players.kill': 1,
-          'players.playerId': 1,
-          'players.label': 1,
-          'players.profile.avatar': 1,
-          'players.profile.gameName': 1,
-          'players.info.name': 1,
-          'players.profile.bio': 1,
-          'players.profile.stats.tierValue': 1,
-          'players.profile.stats.season': 1,
-          'players.profile.address.city': 1,
-          'players.profile.address.district': 1,
-          'players.profile.address.state': 1
-        }
-      },
-      { $unwind: '$players.profile' },
-      { $unwind: '$players.info' },
-      {
-        $group: {
-          _id: {
-            teamId: '$_id',
-            teamCode: '$teamCode',
-            match: '$match',
-            position: '$position'
-          },
-          players: {
-            $push: '$players'
-          }
-        }
-      }
+      ...teamQueryOption
     ]);
 
     res.send(teams);
@@ -901,57 +654,7 @@ router.get('/matches/:id/my-team', auth, isHonest, async (req, res) => {
           match: nonSchemaId(match._id)
         }
       },
-      { $unwind: '$players' },
-      {
-        $lookup: {
-          from: 'profiles',
-          localField: 'players.playerId',
-          foreignField: 'user',
-          as: 'players.profile'
-        }
-      },
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'players.playerId',
-          foreignField: '_id',
-          as: 'players.info'
-        }
-      },
-      {
-        $project: {
-          position: 1,
-          teamCode: 1,
-          match: 1,
-          'players.kill': 1,
-          'players.playerId': 1,
-          'players.label': 1,
-          'players.profile.avatar': 1,
-          'players.profile.gameName': 1,
-          'players.info.name': 1,
-          'players.profile.bio': 1,
-          'players.profile.stats.tierValue': 1,
-          'players.profile.stats.season': 1,
-          'players.profile.address.city': 1,
-          'players.profile.address.district': 1,
-          'players.profile.address.state': 1
-        }
-      },
-      { $unwind: '$players.profile' },
-      { $unwind: '$players.info' },
-      {
-        $group: {
-          _id: {
-            teamId: '$_id',
-            teamCode: '$teamCode',
-            match: '$match',
-            position: '$position'
-          },
-          players: {
-            $push: '$players'
-          }
-        }
-      }
+      ...teamQueryOption
     ]);
 
     res.send(team);

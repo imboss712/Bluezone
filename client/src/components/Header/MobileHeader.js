@@ -1,29 +1,24 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
-import { makeStyles } from '@material-ui/core/styles';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import { makeStyles } from '@mui/styles';
 
 import GuestLinks from './MobileLinks/GuestLinks';
 import AuthLinks from './MobileLinks/AuthLinks';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
-  },
   list: {
     width: 300,
-    [theme.breakpoints.down(425)]: {
+    [theme.breakpoints.down('425')]: {
       width: 275
     },
-    [theme.breakpoints.down(375)]: {
+    [theme.breakpoints.down('375')]: {
       width: 260
     },
-    [theme.breakpoints.down(320)]: {
+    [theme.breakpoints.down('320')]: {
       width: 240
     }
   }

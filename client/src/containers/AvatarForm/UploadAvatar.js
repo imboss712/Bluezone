@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 import * as actions from '../../store/actions/index';
-
 import AvatarForm from './AvatarForm';
 
 const UploadAvatar = (props) => {
@@ -41,6 +40,7 @@ const UploadAvatar = (props) => {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Upload Avatar | Bluezone" />
       </Helmet>
+
       <AvatarForm submitAvatar={submitAvatar} />
     </>
   );

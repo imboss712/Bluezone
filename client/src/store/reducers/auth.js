@@ -10,6 +10,7 @@ import {
   UPDATE_USER,
   DELETE_USER,
   SET_PROFILE_TRUE,
+  SET_BANK_TRUE,
   SET_AVATAR_TRUE,
   SET_AVATAR_FALSE,
   LOGOUT,
@@ -60,6 +61,8 @@ const authReducer = (state = initialState, action) => {
       return { ...state, loading: false, isAuthenticated: false };
     case SET_PROFILE_TRUE:
       return { ...state, user: { ...state.user, isProfile: true } };
+    case SET_BANK_TRUE:
+      return { ...state, user: { ...state.user, isBank: true } };
     case SET_AVATAR_TRUE:
       return { ...state, user: { ...state.user, hasAvatar: true } };
     case SET_AVATAR_FALSE:

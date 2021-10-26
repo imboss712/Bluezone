@@ -1,73 +1,35 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Typography from '@material-ui/core/Typography';
-import SportsEsportsOutlinedIcon from '@material-ui/icons/SportsEsportsOutlined';
-import LocalAtmOutlinedIcon from '@material-ui/icons/LocalAtmOutlined';
-import LiveHelpOutlinedIcon from '@material-ui/icons/LiveHelpOutlined';
-import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
-import BlockOutlinedIcon from '@material-ui/icons/BlockOutlined';
-import EventAvailableOutlinedIcon from '@material-ui/icons/EventAvailableOutlined';
-import VerifiedUserOutlinedIcon from '@material-ui/icons/VerifiedUserOutlined';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Typography from '@mui/material/Typography';
+import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined';
+import LocalAtmOutlinedIcon from '@mui/icons-material/LocalAtmOutlined';
+import LiveHelpOutlinedIcon from '@mui/icons-material/LiveHelpOutlined';
+import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
+import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
+import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
+import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined';
 
-import BackButton from '../BackButton/BackButton';
-
-const useStyles = makeStyles((theme) => ({
-  heading: {
-    fontSize: theme.spacing(4),
-    lineHeight: 1.3,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    margin: theme.spacing(1.5, 0)
-  },
-  para: {
-    marginTop: theme.spacing(1.5)
-  }
-}));
+import BackButton from '../../ui/BackButton/BackButton';
+import HelmetComponent from '../../ui/HelmetComponent/HelmetComponent';
+import componentStyle from '../../ui/styles/componentStyle';
 
 const AboutUs = () => {
-  const classes = useStyles();
+  const classes = componentStyle();
 
   return (
     <>
-      <Helmet>
-        <title>About Us | Online BGMI Tournament - Bluezone</title>
-        <meta
-          name="description"
-          content="Bluezone is a platform for gamers who want to feel the real challenges. Showcase your talent here, compete with the best players and win a lot of prize money."
-        />
-        <link rel="canonical" href="https://www.bluezone.fun/about/about-us" />
-        <meta name="robots" content="index, follow" />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content="About Us | Online BGMI Tournament - Bluezone"
-        />
-        <meta
-          property="og:description"
-          content="Bluezone is a platform for gamers who want to feel the real challenges. Showcase your talent here, compete with the best players and win a lot of prize money."
-        />
-        <meta
-          property="og:url"
-          content="https://www.bluezone.fun/about/about-us"
-        />
-        <meta name="twitter:card" content="summary" />
-        <meta
-          name="twitter:description"
-          content="Bluezone is a platform for gamers who want to feel the real challenges. Showcase your talent here, compete with the best players and win a lot of prize money."
-        />
-        <meta
-          name="twitter:title"
-          content="About Us | Online BGMI Tournament - Bluezone"
-        />
-      </Helmet>
+      <HelmetComponent
+        title="About Us | Online BGMI Tournament - Bluezone"
+        description="Bluezone is a platform for gamers who want to feel the real challenges. Showcase your talent here, compete with the best players and win a lot of prize money."
+        url="https://www.bluezone.fun/about/about-us"
+        indexBehaviour="index, follow"
+      />
+
       <Box>
         <Container>
           <BackButton link="/" text="Back To Home" />
@@ -76,7 +38,7 @@ const AboutUs = () => {
             About Us
           </Typography>
 
-          <Typography className={classes.para}>
+          <Typography className={classes.text}>
             Bluezone is a platform for gamers who want to feel the real
             challenges. This platform is created by the gamers and dedicated to
             the gamers. This is the platform that is best to showcase your
@@ -84,21 +46,22 @@ const AboutUs = () => {
             money. We host tournaments on daily basis.
           </Typography>
 
-          <Typography className={classes.para}>
+          <Typography className={classes.text}>
             This platform helps gamers to establish their own distinct identity
             in the gaming world. We organize tournaments in various modes like
             Solo, Duo, and Squad. Every weekend we have special offers for
             gamers.
           </Typography>
 
-          <Typography className={classes.para}>
+          <Typography className={classes.text}>
             So why are you waiting, just start participating in the tournament
             and enjoy the game?
           </Typography>
 
-          <Typography className={classes.para}>
+          <Typography className={classes.text}>
             <strong>Some of the best features of our platform:</strong>
           </Typography>
+
           <List>
             <ListItem>
               <ListItemIcon>

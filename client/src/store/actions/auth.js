@@ -2,7 +2,7 @@ import axios from 'axios';
 import api from '../../utils/api';
 
 import { setAlert } from './alert';
-import { addDepositTransaction, addWithdrawalTransaction } from './transaction';
+import { addDepositTransaction, addWithdrawalTransaction } from './wallet';
 
 import {
   REGISTER_SUCCESS,
@@ -13,6 +13,7 @@ import {
   VERIFY_USER,
   VERIFY_FAIL,
   SET_PROFILE_TRUE,
+  SET_BANK_TRUE,
   SET_AVATAR_TRUE,
   SET_AVATAR_FALSE,
   GET_USER,
@@ -119,6 +120,13 @@ export const resendCode = (phoneData) => async (dispatch) => {
 export const setProfileTrue = () => (dispatch) => {
   dispatch({
     type: SET_PROFILE_TRUE
+  });
+};
+
+// Set user.isBank true when bank details saved successfully
+export const setBankTrue = () => (dispatch) => {
+  dispatch({
+    type: SET_BANK_TRUE
   });
 };
 

@@ -1,10 +1,10 @@
 import React, { lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import SuspenseLoading from '../../ui/Loading/SuspenseLoading';
+
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-
-import SuspenseLoading from '../../components/Loading/SuspenseLoading';
 
 const AdminRoutes = lazy(() => import('./AdminRoutes'));
 const AuthRoutes = lazy(() => import('./AuthRoutes'));
@@ -23,15 +23,19 @@ const CreateMatch = lazy(() => import('../CreateMatch/CreateMatch'));
 const UpdateMatch = lazy(() => import('../CreateMatch/UpdateMatch'));
 const Profile = lazy(() => import('../Profile/Profile'));
 const Wallet = lazy(() => import('../Wallet/Wallet'));
+const CreateDetails = lazy(() => import('../BankDetails/CreateDetails'));
+const EditDetails = lazy(() => import('../BankDetails/EditDetails'));
 const Matches = lazy(() => import('../Matches/Matches'));
 const MyMatches = lazy(() => import('../Matches/MyMatches'));
-const Requests = lazy(() => import('../Payouts/Requests'));
-const Feedbacks = lazy(() => import('../Feedbacks/Feedbacks'));
 const SingleMatch = lazy(() => import('../SingleMatch/SingleMatch'));
+const Withdrawals = lazy(() => import('../Withdrawals/Withdrawals'));
+const Feedbacks = lazy(() => import('../Feedbacks/Feedbacks'));
 
 const ContactUs = lazy(() => import('../../components/Contact/ContactUs'));
 const AboutUs = lazy(() => import('../../components/About/AboutUs'));
-const Feedback = lazy(() => import('../../components/Feedback/Feedback'));
+const CreateFeedback = lazy(() =>
+  import('../../containers/CreateFeedback/CreateFeedback')
+);
 const Payments = lazy(() => import('../../components/Payments/Payments'));
 const HowToPlay = lazy(() => import('../../components/HowToPlay/HowToPlay'));
 const AllFaqs = lazy(() => import('../../components/AllFaqs/AllFaqs'));
@@ -62,6 +66,12 @@ const Routes = () => {
           <AuthRoutes path="/update-avatar" exact component={UpdateAvatar} />
           <AuthRoutes path="/dashboard" exact component={Profile} />
           <AuthRoutes path="/wallet" exact component={Wallet} />
+          <AuthRoutes
+            path="/create-bank-details"
+            exact
+            component={CreateDetails}
+          />
+          <AuthRoutes path="/edit-bank-details" exact component={EditDetails} />
           <AuthRoutes path="/edit-dashboard" exact component={UpdateProfile} />
           <AuthRoutes path="/edit-account" exact component={UpdateAccount} />
           <AdminRoutes path="/host-tournament" exact component={CreateMatch} />
@@ -70,7 +80,11 @@ const Routes = () => {
             exact
             component={UpdateMatch}
           />
-          <AdminRoutes path="/payout-requests" exact component={Requests} />
+          <AdminRoutes
+            path="/withdrawal-requests"
+            exact
+            component={Withdrawals}
+          />
           <AdminRoutes path="/users-feedback" exact component={Feedbacks} />
           <AuthRoutes path="/tournaments" exact component={Matches} />
           <AuthRoutes path="/my-tournaments" exact component={MyMatches} />
@@ -82,7 +96,7 @@ const Routes = () => {
 
           <Route path="/about/contact-us" exact component={ContactUs} />
           <Route path="/about/about-us" exact component={AboutUs} />
-          <Route path="/about/feedback" exact component={Feedback} />
+          <Route path="/about/feedback" exact component={CreateFeedback} />
           <Route path="/help/payments" exact component={Payments} />
           <Route path="/help/how-to-play" exact component={HowToPlay} />
           <Route path="/help/faqs" exact component={AllFaqs} />

@@ -1,81 +1,45 @@
 import React, { lazy, Suspense, useState, useEffect, useCallback } from 'react';
-import * as Yup from 'yup';
 import * as QueryString from 'query-string';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import { Formik, Form, Field } from 'formik';
-import { TextField } from 'formik-material-ui';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import LockOpenOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import { Formik, Form } from 'formik';
+import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
+import makeStyles from '@mui/styles/makeStyles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+import { validationSchema } from './FormHelper/index';
 
 import * as actions from '../../store/actions/index';
-
-import BackButton from '../../components/BackButton/BackButton';
-
-const VerificationHelper = lazy(() => import('./VerificationHelper'));
+import BackButton from '../../ui/BackButton/BackButton';
+import globalStyles from '../../ui/styles/globalStyles';
+import FormikAdornment from '../../ui/FormComponents/FormikAdornment';
+import FormikField from '../../ui/FormComponents/FormikField';
+import SubmitButton from '../../ui/SubmitButton/SubmitButton';
+const FormNavigation = lazy(() =>
+  import('../../ui/FormNavigation/FormNavigation')
+);
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 600,
-    margin: 'auto'
-  },
-  paper: {
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(3, 4),
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(2.8, 3)
-    },
-    [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(2.6, 2)
-    },
-    borderRadius: theme.spacing(0.75),
-    textAlign: 'center'
-  },
-  typography: {
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
-    color: theme.palette.text.secondary
-  },
   timer: {
     padding: theme.spacing(1.5),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       padding: theme.spacing(1.2)
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(0.9)
     },
     fontWeight: 'bold'
-  },
-  box: {
-    margin: theme.spacing(3, 4),
-    [theme.breakpoints.down('sm')]: {
-      margin: theme.spacing(2.8, 2.8)
-    },
-    [theme.breakpoints.down('xs')]: {
-      margin: theme.spacing(2.6, 1.5)
-    }
-  },
-  icon: {
-    marginLeft: theme.spacing(1),
-    color: theme.palette.text.secondary
-  },
-  lockIcon: {
-    fontSize: theme.spacing(6),
-    color: '#3F51B5'
   }
 }));
 
 const Verification = (props) => {
   const classes = useStyles();
+  const sharedClasses = globalStyles();
 
   const isSmallScreen = useMediaQuery('(max-width:400px)');
 
@@ -94,9 +58,11 @@ const Verification = (props) => {
   const reduceTimer = useCallback(() => {
     if (isMounted) {
       setTimer(60);
+
       let myTimer = setInterval(() => {
         setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
+
       setTimeout(() => {
         clearInterval(myTimer);
       }, 60000);
@@ -144,17 +110,18 @@ const Verification = (props) => {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Verify OTP | Bluezone" />
       </Helmet>
-      <Box className={classes.root}>
+
+      <Box className={sharedClasses.root}>
         <Container>
           <BackButton
             link={fromUrl === 'login' ? '/login' : '/register'}
             text={fromUrl === 'login' ? 'Back To Login' : 'Back To Register'}
           />
 
-          <Paper className={classes.paper} variant="outlined">
-            <LockOpenOutlinedIcon className={classes.lockIcon} />
+          <Paper className={sharedClasses.paper} variant="outlined">
+            <LockOpenOutlinedIcon className={sharedClasses.headingIcon} />
 
-            <Typography variant="h5" className={classes.typography}>
+            <Typography variant="h5" className={sharedClasses.headingText}>
               <b>Verification Code</b>
             </Typography>
 
@@ -163,14 +130,7 @@ const Verification = (props) => {
                 phone: (user && user.phone) || '',
                 code: ''
               }}
-              validationSchema={Yup.object({
-                phone: Yup.string()
-                  .required('Required')
-                  .matches(/^[6-9]\d{9}$/, 'Invalid Mobile Number'),
-                code: Yup.string()
-                  .required('Required')
-                  .matches(/^\d{6}$/, 'Invalid Verification Code')
-              })}
+              validationSchema={validationSchema}
               onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
                   setSubmitting(false);
@@ -178,63 +138,42 @@ const Verification = (props) => {
                 }, 500);
               }}
             >
-              {({ submitForm, isSubmitting, errors }) => (
+              {({ submitForm, isSubmitting, touched, errors }) => (
                 <Form>
-                  <Box className={classes.box}>
-                    <Field
-                      component={TextField}
-                      variant="outlined"
+                  <Box className={sharedClasses.box}>
+                    <FormikAdornment
                       name="phone"
-                      type="tel"
                       label="Mobile Number"
-                      InputProps={{
-                        readOnly: true,
-                        startAdornment: (
-                          <InputAdornment position="start">+91</InputAdornment>
-                        )
-                      }}
-                      autoComplete="off"
-                      fullWidth
+                      error={touched.phone && errors.phone ? true : false}
+                      disabled={isSubmitting}
+                      readOnly={true}
                     />
                   </Box>
-                  <Box className={classes.box}>
-                    <Field
-                      component={TextField}
-                      variant="outlined"
+
+                  <Box className={sharedClasses.box}>
+                    <FormikField
                       name="code"
-                      type="tel"
                       label="Verification Code"
+                      type="tel"
                       placeholder="6 digit code"
-                      autoComplete="off"
-                      fullWidth
+                      error={touched.code && errors.code ? true : false}
+                      disabled={isSubmitting}
                     />
                   </Box>
 
                   <Box
-                    className={classes.box}
-                    style={{ display: 'flex', justifyContent: 'flex-start' }}
+                    className={sharedClasses.box}
+                    sx={{ display: 'flex', justifyContent: 'flex-start' }}
                   >
                     {timer === 0 ? (
-                      <Button
-                        size="large"
-                        color="primary"
+                      <SubmitButton
+                        variant="text"
+                        createText={isSmallScreen ? 'Resend' : 'Resend Code'}
+                        creatingText="Resending... "
+                        isSubmitting={resending}
                         disabled={timer === 0 ? false : true}
                         onClick={handleResend}
-                      >
-                        {resending ? (
-                          <>
-                            Resending...{' '}
-                            <CircularProgress
-                              size={16}
-                              className={classes.icon}
-                            />
-                          </>
-                        ) : isSmallScreen ? (
-                          'Resend'
-                        ) : (
-                          'Resend Code'
-                        )}
-                      </Button>
+                      />
                     ) : (
                       <Typography variant="body2" className={classes.timer}>
                         {isSmallScreen
@@ -243,27 +182,15 @@ const Verification = (props) => {
                       </Typography>
                     )}
 
-                    <Button
-                      size="large"
-                      variant="contained"
-                      color="primary"
-                      disabled={isSubmitting || errors.code ? true : false}
-                      onClick={submitForm}
-                      disableElevation
-                      style={{ marginLeft: 'auto' }}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          Verifying...{' '}
-                          <CircularProgress
-                            size={16}
-                            className={classes.icon}
-                          />
-                        </>
-                      ) : (
-                        'Verify'
-                      )}
-                    </Button>
+                    <span style={{ marginLeft: 'auto' }}>
+                      <SubmitButton
+                        createText="Verify"
+                        creatingText="Verifying... "
+                        isSubmitting={isSubmitting}
+                        disabled={isSubmitting || errors.code ? true : false}
+                        onClick={submitForm}
+                      />
+                    </span>
                   </Box>
                 </Form>
               )}
@@ -271,7 +198,11 @@ const Verification = (props) => {
           </Paper>
 
           <Suspense>
-            <VerificationHelper url={fromUrl} />
+            <FormNavigation
+              text="Wrong mobile number?"
+              link={fromUrl === 'login' ? '/login' : '/register'}
+              linkText="Change Number"
+            />
           </Suspense>
         </Container>
       </Box>

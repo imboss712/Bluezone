@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { formatISO, format } from 'date-fns';
 import { Helmet } from 'react-helmet-async';
 
-import * as actions from '../../store/actions/index';
 import Match from './Match';
 
-import Loading from '../../components/Loading/Loading';
-const Error = lazy(() => import('../../components/Error/Error'));
+import * as actions from '../../store/actions/index';
+import Loading from '../../ui/Loading/Loading';
+const Error = lazy(() => import('../../ui/Error/Error'));
 
 const UpdateMatch = (props) => {
   const {

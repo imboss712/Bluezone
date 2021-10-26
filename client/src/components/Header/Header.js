@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Box from '@material-ui/core/Box';
-import AppBar from '@material-ui/core/AppBar';
-import Container from '@material-ui/core/Container';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Box from '@mui/material/Box';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { makeStyles } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+import headerStyle from '../../ui/styles/headerStyles';
 
 import GuestLinks from './Links/GuestLinks';
 import AuthLinks from './Links/AuthLinks';
@@ -22,12 +24,6 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5)
   },
-  buttonRight: {
-    marginRight: theme.spacing(2)
-  },
-  btnLink: {
-    textDecoration: 'none'
-  },
   title: {
     flexGrow: 1
   }
@@ -35,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = (props) => {
   const classes = useStyles();
+  const sharedClasses = headerStyle();
 
   const isSmallScreen = useMediaQuery('(max-width:840px)');
 
@@ -44,11 +41,16 @@ const Header = (props) => {
 
   return (
     <Box className={classes.root}>
-      <AppBar position="static" color="transparent" variant="outlined">
+      <AppBar
+        position="static"
+        color="transparent"
+        elevation={0}
+        sx={{ borderBottom: '1px solid #0000001f' }}
+      >
         <Container>
           <Toolbar className={classes.toolbar}>
             <Typography variant="h5" color="primary" className={classes.title}>
-              <Link to="/" className={classes.btnLink}>
+              <Link to="/" className={sharedClasses.buttonLink}>
                 <b>bluezone</b>
               </Link>
             </Typography>

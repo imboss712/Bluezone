@@ -2,80 +2,43 @@ import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import InsertPhotoRoundedIcon from '@material-ui/icons/InsertPhotoRounded';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Input from '@mui/material/Input';
+import FormHelperText from '@mui/material/FormHelperText';
+import InsertPhotoRoundedIcon from '@mui/icons-material/InsertPhotoRounded';
+import makeStyles from '@mui/styles/makeStyles';
 
-import BackButton from '../../components/BackButton/BackButton';
-import SuspenseLoading from '../../components/Loading/SuspenseLoading';
+import BackButton from '../../ui/BackButton/BackButton';
+import SuspenseLoading from '../../ui/Loading/SuspenseLoading';
+import SubmitButton from '../../ui/SubmitButton/SubmitButton';
+import globalStyles from '../../ui/styles/globalStyles';
 
-import { validationSchema } from './FormHelper/FormHelper';
-
+import { validationSchema } from './FormHelper/index';
 const Preview = lazy(() => import('./FormHelper/Preview'));
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 600,
-    margin: 'auto'
-  },
   paper: {
     padding: theme.spacing(3, 4),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       padding: theme.spacing(2.8, 3)
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(2.6, 2)
     },
     borderRadius: theme.spacing(0.75),
     textAlign: 'center'
-  },
-  box: {
-    margin: theme.spacing(3, 4),
-    [theme.breakpoints.down('sm')]: {
-      margin: theme.spacing(2.8, 2.8)
-    },
-    [theme.breakpoints.down('xs')]: {
-      margin: theme.spacing(2.6, 1.5)
-    }
-  },
-  typography: {
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
-    color: theme.palette.text.secondary
-  },
-  icon: {
-    marginLeft: theme.spacing(1),
-    color: theme.palette.text.secondary
-  },
-  userIcon: {
-    fontSize: theme.spacing(6),
-    color: '#3F51B5'
-  },
-  preview: {
-    width: theme.spacing(24),
-    height: theme.spacing(24),
-    margin: '8px auto 24px auto'
-  },
-  submitBtn: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    [theme.breakpoints.down('xs')]: {
-      justifyContent: 'space-between'
-    }
   }
 }));
 
 const AvatarForm = (props) => {
   const classes = useStyles();
+  const sharedClasses = globalStyles();
 
   const { edit, submitAvatar, previewImg } = props;
 
@@ -86,17 +49,18 @@ const AvatarForm = (props) => {
   }, [edit, previewImg]);
 
   return (
-    <Box className={classes.root}>
+    <Box className={sharedClasses.root}>
       <Container>
         {edit && <BackButton link="/dashboard" text="Back To Dashboard" />}
 
         <Paper
           className={classes.paper}
           variant="outlined"
-          style={{ marginTop: edit ? '16px' : '32px' }}
+          sx={{ marginTop: edit ? 2 : 4 }}
         >
-          <InsertPhotoRoundedIcon className={classes.userIcon} />
-          <Typography className={classes.typography} variant="h5">
+          <InsertPhotoRoundedIcon className={sharedClasses.headingIcon} />
+
+          <Typography className={sharedClasses.headingText} variant="h5">
             <b>{edit ? 'Update Profile Picture' : 'Upload Profile Picture'}</b>
           </Typography>
 
@@ -133,7 +97,7 @@ const AvatarForm = (props) => {
                     />
                   </Suspense>
 
-                  <Box className={classes.box}>
+                  <Box className={sharedClasses.box}>
                     <FormControl
                       fullWidth
                       variant="outlined"
@@ -142,6 +106,7 @@ const AvatarForm = (props) => {
                       <InputLabel htmlFor="avatar" shrink>
                         Avatar
                       </InputLabel>
+
                       <Input
                         id="avatar"
                         aria-describedby="avatar-helper-text"
@@ -161,13 +126,19 @@ const AvatarForm = (props) => {
                           accept: 'image/*'
                         }}
                       />
+
                       <FormHelperText id="avatar-helper-text">
                         {errors.avatar}
                       </FormHelperText>
                     </FormControl>
                   </Box>
 
-                  <Box className={clsx(classes.box, classes.submitBtn)}>
+                  <Box
+                    className={clsx(
+                      sharedClasses.box,
+                      sharedClasses.submitButton
+                    )}
+                  >
                     <Link
                       to="/dashboard"
                       style={{ textDecoration: 'none', marginRight: '10px' }}
@@ -177,28 +148,16 @@ const AvatarForm = (props) => {
                       </Button>
                     </Link>
 
-                    <Button
-                      size="large"
-                      variant="contained"
-                      color="primary"
+                    <SubmitButton
+                      createText="Upload Avatar"
+                      creatingText="Uploading... "
+                      updateText="Update Avatar"
+                      updatingText="Updating... "
+                      isSubmitting={isSubmitting}
+                      edit={edit}
                       disabled={isSubmitting || errors.avatar ? true : false}
                       onClick={submitForm}
-                      disableElevation
-                    >
-                      {isSubmitting ? (
-                        <>
-                          {edit ? 'Updating... ' : 'Uploading... '}
-                          <CircularProgress
-                            size={16}
-                            className={classes.icon}
-                          />
-                        </>
-                      ) : edit ? (
-                        'Update Avatar'
-                      ) : (
-                        'Upload Avatar'
-                      )}
-                    </Button>
+                    />
                   </Box>
                 </form>
               );

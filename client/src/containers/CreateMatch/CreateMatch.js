@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet-async';
 
 import * as actions from '../../store/actions/index';
 
-import { entryItems, prizePoolItems } from './FormHelper/Items';
+import { entryItems, prizePoolItems } from './FormHelper/index';
 import Match from './Match';
 
 const CreateMatch = (props) => {

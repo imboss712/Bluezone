@@ -1,27 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import makeStyles from '@mui/styles/makeStyles';
 
-import Social from './Social';
-import Address from './Address';
-import Disclaimer from './Disclaimer';
-import Location from './Location';
-import Risk from './Risk';
-import footerLinks from './footerLinks';
+import footerLinks from '../../datas/footerLinks';
+
+import Social from './ComponentHelper/Social';
+import Address from './ComponentHelper/Address';
+import Disclaimer from './ComponentHelper/Disclaimer';
+import Location from './ComponentHelper/Location';
+import Warning from './ComponentHelper/Warning';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: '#455a64',
     marginTop: theme.spacing(5)
   },
-  gridGrp: {
+  gridBox: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(2)
   },
@@ -45,18 +46,20 @@ const Footer = () => {
     <>
       <Box className={classes.root}>
         <Container>
-          <Grid container spacing={3} className={classes.gridGrp}>
+          <Grid container spacing={3} className={classes.gridBox}>
             <Grid item xs={6} sm={4} md={3}>
               <Social />
             </Grid>
+
             {footerLinks.map((f) => {
               return (
                 <Grid item xs={6} sm={4} md={3} key={f._id}>
                   <Paper className={classes.paper} elevation={0}>
-                    <List style={{ padding: '0px' }}>
+                    <List sx={{ padding: 0 }}>
                       <ListItem className={classes.linkTitle}>
                         {f.title}
                       </ListItem>
+
                       {f.links.map((link) => {
                         return (
                           <ListItem key={link._id}>
@@ -83,7 +86,7 @@ const Footer = () => {
         </Container>
       </Box>
       <Location />
-      <Risk />
+      <Warning />
     </>
   );
 };

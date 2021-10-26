@@ -19,7 +19,13 @@ const transactionSchema = new mongoose.Schema(
     },
     subType: {
       type: String,
-      enum: ['Deposit', 'Withdraw', 'Participation', 'Winning', 'Refund'],
+      enum: [
+        'Deposit',
+        'Withdraw Request',
+        'Participation',
+        'Winning',
+        'Refund'
+      ],
       default: 'Participation'
     },
     paymentAmount: {

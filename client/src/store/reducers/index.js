@@ -5,8 +5,9 @@ import alertReducer from './alert';
 import profileReducer from './profile';
 import matchReducer from './match';
 import teamReducer from './team';
-import transactionReducer from './transaction';
-import payoutReducer from './payout';
+import walletReducer from './wallet';
+import bankReducer from './bank';
+import withdrawalReducer from './withdrawal';
 import feedbackReducer from './feedback';
 
 export default combineReducers({
@@ -15,7 +16,8 @@ export default combineReducers({
   profile: profileReducer,
   match: matchReducer,
   team: teamReducer,
-  transaction: transactionReducer,
-  payout: payoutReducer,
+  wallet: walletReducer,
+  bank: bankReducer,
+  withdrawal: withdrawalReducer,
   feedback: feedbackReducer
 });

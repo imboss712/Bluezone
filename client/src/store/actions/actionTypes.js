@@ -11,6 +11,7 @@ export const RESEND_CODE = 'RESEND_CODE';
 export const VERIFY_USER = 'VERIFY_USER';
 export const VERIFY_FAIL = 'VERIFY_FAIL';
 export const SET_PROFILE_TRUE = 'SET_PROFILE_TRUE';
+export const SET_BANK_TRUE = 'SET_BANK_TRUE';
 export const SET_AVATAR_TRUE = 'SET_AVATAR_TRUE';
 export const SET_AVATAR_FALSE = 'SET_AVATAR_FALSE';
 export const GET_USER = 'GET_USER';
@@ -23,6 +24,13 @@ export const LOGOUT_ALL = 'LOGOUT_ALL';
 // Wallet
 export const ADD_AMOUNT = 'ADD_AMOUNT';
 export const REQUEST_AMOUNT = 'REQUEST_AMOUNT';
+
+// Bank
+export const GET_BANK_DETAILS = 'GET_BANK_DETAILS';
+export const GET_BANK_DETAIL_BY_ID = 'GET_BANK_DETAIL_BY_ID';
+export const CREATE_BANK_DETAILS = 'CREATE_BANK_DETAILS';
+export const EDIT_BANK_DETAILS = 'EDIT_BANK_DETAILS';
+export const BANK_ERROR = 'BANK_ERROR';
 
 // Profile
 export const GET_PROFILE = 'GET_PROFILE';
@@ -62,7 +70,7 @@ export const GET_TEAM = 'GET_TEAM';
 export const TEAM_ERROR = 'TEAM_ERROR';
 export const TEAMS_ERROR = 'TEAMS_ERROR';
 
-// Transaction
+// Wallet
 export const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
 export const GET_PAYOUTS = 'GET_PAYOUTS';
 export const TRANSACTIONS_ERROR = 'TRANSACTIONS_ERROR';
@@ -70,10 +78,10 @@ export const PAYOUTS_ERROR = 'PAYOUTS_ERROR';
 export const ADD_DEPOSIT_TRANSACTION = 'ADD_DEPOSIT_TRANSACTION';
 export const ADD_WITHDRAWAL_TRANSACTION = 'ADD_WITHDRAWAL_TRANSACTION';
 
-// Payout
-export const GET_PAYOUT_REQUESTS = 'GET_PAYOUT_REQUESTS';
-export const PAYOUT_REQUESTS_ERROR = 'PAYOUT_REQUESTS_ERROR';
-export const SEND_PAYOUT_LINK = 'SEND_PAYOUT_LINK';
+// Withdrawal
+export const GET_WITHDRAWAL_REQUESTS = 'GET_WITHDRAWAL_REQUESTS';
+export const WITHDRAWAL_REQUESTS_ERROR = 'WITHDRAWAL_REQUESTS_ERROR';
+export const SEND_PAYOUT = 'SEND_PAYOUT';
 export const SEND_PAYOUT_ERROR = 'SEND_PAYOUT_ERROR';
 
 // Feedback

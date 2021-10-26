@@ -1,14 +1,14 @@
 import React from 'react';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import SportsEsportsRoundedIcon from '@material-ui/icons/SportsEsportsRounded';
-import AccountBalanceWalletRoundedIcon from '@material-ui/icons/AccountBalanceWalletRounded';
-import LiveHelpRoundedIcon from '@material-ui/icons/LiveHelpRounded';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import SportsEsportsRoundedIcon from '@mui/icons-material/SportsEsportsRounded';
+import AccountBalanceWalletRoundedIcon from '@mui/icons-material/AccountBalanceWalletRounded';
+import LiveHelpRoundedIcon from '@mui/icons-material/LiveHelpRounded';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(5),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       padding: theme.spacing(4.5)
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(4)
     },
     textAlign: 'center',
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.spacing(9.5),
     marginRight: theme.spacing(2)
   },
-  typography: {
+  text: {
     fontWeight: 'bolder',
     textAlign: 'left',
     fontSize: theme.spacing(3)
@@ -51,7 +51,7 @@ const Info = () => {
             <Paper className={classes.paper} elevation={0}>
               <SportsEsportsRoundedIcon className={classes.icon} />
 
-              <Typography className={classes.typography}>
+              <Typography className={classes.text}>
                 DAILY <br />
                 MATCHES
               </Typography>
@@ -62,7 +62,7 @@ const Info = () => {
             <Paper className={classes.paper} elevation={0}>
               <AccountBalanceWalletRoundedIcon className={classes.icon} />
 
-              <Typography className={classes.typography}>
+              <Typography className={classes.text}>
                 EASY <br /> PAYMENTS
               </Typography>
             </Paper>
@@ -72,12 +72,13 @@ const Info = () => {
             <Paper className={classes.paper} elevation={0}>
               <LiveHelpRoundedIcon className={classes.icon} />
 
-              <Typography className={classes.typography}>
+              <Typography className={classes.text}>
                 24 X 7 <br /> SUPPORT
               </Typography>
             </Paper>
           </Grid>
         </Grid>
+
         <Divider variant="middle" />
       </Container>
     </Box>

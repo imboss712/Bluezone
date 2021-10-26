@@ -1,36 +1,36 @@
 import React from 'react';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 
-import FeedbackLists from './FeedbackLists';
-import SingleFeedback from './SingleFeedback';
+import homeFeedbacksList from '../../../datas/homeFeedbacksList';
+import SingleFeedback from './ComponentHelper/SingleFeedback';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(5),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingTop: theme.spacing(4.75)
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(4.5)
     }
   },
-  gridGrp: {
+  gridBox: {
     marginTop: theme.spacing(5),
     marginBottom: theme.spacing(5)
   },
-  typography: {
+  heading: {
     color: '#282828',
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: theme.spacing(4),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       fontSize: theme.spacing(3.8)
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.6)
     }
   }
@@ -44,15 +44,15 @@ const Feedback = () => {
       <Container>
         <Typography
           variant="h2"
-          className={classes.typography}
+          className={classes.heading}
           title="Bluezone User Feedback"
         >
           WHAT OUR USERS SAY
         </Typography>
 
-        <Box className={classes.gridGrp}>
+        <Box className={classes.gridBox}>
           <Grid container spacing={2}>
-            {FeedbackLists.map((feedback) => {
+            {homeFeedbacksList.map((feedback) => {
               return (
                 <Grid item xs={12} sm={6} md={4} key={feedback._id}>
                   <SingleFeedback feedback={feedback} />

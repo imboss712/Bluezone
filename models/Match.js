@@ -77,12 +77,6 @@ const matchSchema = new mongoose.Schema(
 matchSchema.index({ matchStatus: 1, createdAt: -1 });
 matchSchema.index({ createdAt: -1 });
 
-matchSchema.virtual('teams', {
-  ref: 'Team',
-  localField: '_id',
-  foreignField: 'match'
-});
-
 const Match = mongoose.model('Match', matchSchema);
 
 module.exports = Match;

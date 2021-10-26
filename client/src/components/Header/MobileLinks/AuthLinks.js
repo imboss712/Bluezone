@@ -1,36 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-
-import SportsEsportsOutlinedIcon from '@material-ui/icons/SportsEsportsOutlined';
-import StarBorderOutlinedIcon from '@material-ui/icons/StarBorderOutlined';
-import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
-import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined';
+import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 import * as actions from '../../../store/actions/index';
+import headerStyle from '../../../ui/styles/headerStyles';
 
 import AdminLinks from './AdminLinks';
-// import AllLinks from './AllLinks';
-
-const useStyles = makeStyles((theme) => ({
-  btnLink: {
-    textDecoration: 'none'
-  },
-  divider: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
-  }
-}));
 
 const AuthLinks = (props) => {
-  const classes = useStyles();
+  const classes = headerStyle();
 
   const {
     auth: { isAuthenticated, user },
@@ -53,7 +41,7 @@ const AuthLinks = (props) => {
           <AdminLinks />
         ) : null}
 
-        <Link to="/tournaments" className={classes.btnLink}>
+        <Link to="/tournaments" className={classes.buttonLink}>
           <ListItem button>
             <ListItemIcon>
               <SportsEsportsOutlinedIcon color="primary" />
@@ -62,7 +50,7 @@ const AuthLinks = (props) => {
           </ListItem>
         </Link>
 
-        <Link to="/my-tournaments" className={classes.btnLink}>
+        <Link to="/my-tournaments" className={classes.buttonLink}>
           <ListItem button>
             <ListItemIcon>
               <StarBorderOutlinedIcon color="primary" />
@@ -73,9 +61,7 @@ const AuthLinks = (props) => {
 
         <Divider variant="middle" className={classes.divider} />
 
-        {/* <AllLinks /> */}
-
-        <Link to="/dashboard" className={classes.btnLink}>
+        <Link to="/dashboard" className={classes.buttonLink}>
           <ListItem button>
             <ListItemIcon>
               <AccountCircleOutlinedIcon color="primary" />
@@ -84,7 +70,7 @@ const AuthLinks = (props) => {
           </ListItem>
         </Link>
 
-        <Link to="/wallet" className={classes.btnLink}>
+        <Link to="/wallet" className={classes.buttonLink}>
           <ListItem button>
             <ListItemIcon>
               <AccountBalanceWalletOutlinedIcon color="primary" />
@@ -93,7 +79,7 @@ const AuthLinks = (props) => {
           </ListItem>
         </Link>
 
-        <Link to="/edit-dashboard" className={classes.btnLink}>
+        <Link to="/edit-dashboard" className={classes.buttonLink}>
           <ListItem button>
             <ListItemIcon>
               <EditOutlinedIcon color="primary" />
@@ -106,14 +92,14 @@ const AuthLinks = (props) => {
 
         <ListItem button onClick={handleLogout}>
           <ListItemIcon>
-            <ExitToAppRoundedIcon />
+            <LogoutOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="Logout" />
         </ListItem>
 
         <ListItem button onClick={handleLogoutAll}>
           <ListItemIcon>
-            <ExitToAppRoundedIcon />
+            <LogoutOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="Logout All" />
         </ListItem>

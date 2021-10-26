@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { formatISO, format } from 'date-fns';
 import { Helmet } from 'react-helmet-async';
 
-import * as actions from '../../store/actions/index';
 import Register from './Register';
 
-import Loading from '../../components/Loading/Loading';
+import * as actions from '../../store/actions/index';
+import Loading from '../../ui/Loading/Loading';
 
 const UpdateAccount = (props) => {
   const {

@@ -117,10 +117,8 @@ router.patch('/matches/:id', auth, authAdmin, async (req, res) => {
       return res.status(404).send({ errors: [{ msg: 'Match not found' }] });
     }
 
-    updates.forEach((update) => {
-      // eslint-disable-next-line security/detect-object-injection
-      match[update] = req.body[update];
-    });
+    // eslint-disable-next-line security/detect-object-injection
+    updates.forEach((update) => (match[update] = req.body[update]));
 
     await match.save();
 

@@ -1,60 +1,31 @@
 import React, { useEffect, lazy, Suspense } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import FeedbackRoundedIcon from '@material-ui/icons/FeedbackRounded';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import FeedbackRoundedIcon from '@mui/icons-material/FeedbackRounded';
+import makeStyles from '@mui/styles/makeStyles';
 
-import * as actions from '../../store/actions/index';
-
-import Loading from '../../components/Loading/Loading';
-import BackButton from '../../components/BackButton/BackButton';
 import Feedback from './Feedback/Feedback';
 
-const Error = lazy(() => import('../../components/Error/Error'));
+import * as actions from '../../store/actions/index';
+import BackButton from '../../ui/BackButton/BackButton';
+import Loading from '../../ui/Loading/Loading';
+import globalStyles from '../../ui/styles/globalStyles';
+const Error = lazy(() => import('../../ui/Error/Error'));
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 960,
     margin: 'auto'
-  },
-  paper: {
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(3, 4),
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(2.8, 3)
-    },
-    [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(2.6, 2)
-    },
-    borderRadius: theme.spacing(0.75),
-    textAlign: 'center'
-  },
-  typography: {
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
-    color: theme.palette.text.secondary
-  },
-  box: {
-    margin: theme.spacing(3, 4),
-    [theme.breakpoints.down('sm')]: {
-      margin: theme.spacing(2.8, 2.75)
-    },
-    [theme.breakpoints.down('xs')]: {
-      margin: theme.spacing(2.6, 1.4)
-    }
-  },
-  feedbackIcon: {
-    fontSize: theme.spacing(6),
-    color: '#3F51B5'
   }
 }));
 
 const Feedbacks = (props) => {
   const classes = useStyles();
+  const sharedClasses = globalStyles();
 
   const {
     feedback: { feedbacksLoading, feedbacks },
@@ -92,15 +63,15 @@ const Feedbacks = (props) => {
         <Container>
           <BackButton link="/tournaments" text="Go To Tournaments" />
 
-          <Paper className={classes.paper} variant="outlined">
-            <FeedbackRoundedIcon className={classes.feedbackIcon} />
-            <Typography className={classes.typography} variant="h5">
+          <Paper className={sharedClasses.paper} variant="outlined">
+            <FeedbackRoundedIcon className={sharedClasses.headingIcon} />
+            <Typography className={sharedClasses.headingText} variant="h5">
               <b>Users Feedback</b>
             </Typography>
 
-            <Box className={classes.box}>
+            <Box className={sharedClasses.box}>
               <Typography variant="body2" color="textSecondary">
-                Last 20 users feedback will be shown here.
+                Last 10 users feedback will be shown here.
               </Typography>
             </Box>
 

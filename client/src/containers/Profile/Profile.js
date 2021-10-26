@@ -1,52 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import Chip from '@mui/material/Chip';
+import FaceIcon from '@mui/icons-material/Face';
 
 import * as actions from '../../store/actions/index';
+import BackButton from '../../ui/BackButton/BackButton';
+import globalStyles from '../../ui/styles/globalStyles';
+import Loading from '../../ui/Loading/Loading';
+import SuspenseLoading from '../../ui/Loading/SuspenseLoading';
+const Error = lazy(() => import('../../ui/Error/Error'));
 
-import Intro from './ProfileSection/Intro';
-import Genral from './ProfileSection/Genral';
-import Stats from './ProfileSection/Stats';
-import ProfileAddress from './ProfileSection/Address';
-
-import BackButton from '../../components/BackButton/BackButton';
-import Loading from '../../components/Loading/Loading';
-import Error from '../../components/Error/Error';
-
-const useStyles = makeStyles((theme) => ({
-  leftBar: {
-    padding: theme.spacing(2.5),
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(2.25)
-    },
-    [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(2)
-    },
-    marginTop: theme.spacing(2),
-    position: 'sticky',
-    top: 10,
-    bottom: 10,
-    zIndex: 5
-  },
-  rightBar: {
-    padding: theme.spacing(2.5),
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(2.25)
-    },
-    [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(2)
-    },
-    marginTop: theme.spacing(2)
-  }
-}));
+const ProfileActionButton = lazy(() =>
+  import('./ComponentHelper/ProfileActionButton')
+);
+const AvatarComponent = lazy(() => import('./ComponentHelper/AvatarComponent'));
+const ProfileData = lazy(() => import('./ComponentHelper/ProfileData'));
 
 const Profile = (props) => {
-  const classes = useStyles();
+  const classes = globalStyles();
 
   const {
     user,
@@ -63,7 +40,11 @@ const Profile = (props) => {
   }
 
   if (profile === null && profileError && profileError.status) {
-    return <Error status={profileError.status} statusText={profileError.msg} />;
+    return (
+      <Suspense>
+        <Error status={profileError.status} statusText={profileError.msg} />
+      </Suspense>
+    );
   }
 
   if (profile) {
@@ -87,25 +68,42 @@ const Profile = (props) => {
           <meta name="twitter:title" content="Dashboard | Bluezone" />
         </Helmet>
 
-        <Box>
+        <Box className={classes.root}>
           <Container>
             <BackButton link="/tournaments" text="Go To Tournaments" />
 
-            <Grid container spacing={2} justifyContent="center">
-              <Grid item xs={12} md={10} lg={4}>
-                <Paper className={classes.leftBar} variant="outlined">
-                  <Intro profile={profile} user={user} />
-                </Paper>
-              </Grid>
+            <Paper className={classes.paper} variant="outlined">
+              <Chip
+                icon={<FaceIcon />}
+                label={profile.bio}
+                color="primary"
+                variant="outlined"
+                sx={{ marginBottom: 1 }}
+              />
 
-              <Grid item xs={12} md={10} lg={8}>
-                <Paper variant="outlined" className={classes.rightBar}>
-                  <Genral profile={profile} user={user} />
-                  <Stats stats={profile.stats} />
-                  <ProfileAddress address={profile.address} />
-                </Paper>
-              </Grid>
-            </Grid>
+              <Suspense>
+                <AvatarComponent user={user} />
+              </Suspense>
+
+              <section style={{ marginTop: '8px', marginBottom: '12px' }}>
+                <Typography variant="h6">{user.name}</Typography>
+                <Typography variant="body2" gutterBottom>
+                  {profile.gameName}
+                </Typography>
+              </section>
+
+              <Divider sx={{ marginTop: 1 }} />
+
+              <Suspense>
+                <ProfileActionButton />
+              </Suspense>
+
+              <Divider sx={{ marginTop: 1 }} />
+
+              <Suspense fallback={<SuspenseLoading />}>
+                <ProfileData profile={profile} user={user} />
+              </Suspense>
+            </Paper>
           </Container>
         </Box>
       </>

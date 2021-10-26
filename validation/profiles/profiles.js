@@ -1,36 +1,28 @@
+const Validator = require('validator');
 const isEmpty = require('is-empty');
 
-const { genralInput } = require('./profileValidationHelper/genralValidation');
-const { statsInput } = require('./profileValidationHelper/statsValidation');
-const { addressInput } = require('./profileValidationHelper/addressValidation');
-const { socialInput } = require('./profileValidationHelper/socialValidation');
-
-// Create profile validation
 const profileValidation = (input) => {
-  const { gameName, gameId, bio, role, favoriteGun, stats, address, social } =
-    input;
+  const errors = [];
 
-  const { genralErrors } = genralInput({
-    gameName,
-    gameId,
-    bio,
-    role,
-    favoriteGun
-  });
-  const { statsErrors } = statsInput(stats);
-  const { addressErrors } = addressInput(address);
-  const { socialErrors } = socialInput(social);
+  input.gameName = !isEmpty(input.gameName) ? input.gameName : '';
+  input.gameId = !isEmpty(input.gameId) ? input.gameId : '';
+  input.bio = !isEmpty(input.bio) ? input.bio : '';
 
-  const errors = [
-    ...genralErrors,
-    ...statsErrors,
-    ...addressErrors,
-    ...socialErrors
-  ];
+  if (Validator.isEmpty(input.gameName, { ignore_whitespace: true })) {
+    errors.push({ msg: 'GameName field is required' });
+  }
+
+  if (Validator.isEmpty(input.gameId.toString(), { ignore_whitespace: true })) {
+    errors.push({ msg: 'GameId field is required' });
+  }
+
+  if (
+    Validator.isEmpty(input.bio, { ignore_whitespace: true, max_length: 70 })
+  ) {
+    errors.push({ msg: 'Bio field is required' });
+  }
 
   return { errors, isValid: isEmpty(errors) };
 };
 
-module.exports = {
-  profileValidation
-};
+module.exports = { profileValidation };

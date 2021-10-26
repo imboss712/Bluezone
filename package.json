@@ -38,7 +38,7 @@
     "prettier": "2.3.2"
   },
   "dependencies": {
-    "axios": "0.21.1",
+    "axios": "0.23.0",
     "client": "file:client",
     "compression": "1.7.4",
     "concurrently": "6.2.1",
@@ -54,7 +54,6 @@
     "mongoose": "5.13.7",
     "multer": "1.4.3",
     "nanoid": "3.1.25",
-    "normalize-url": "5.3.1",
     "razorpay": "2.0.6",
     "twilio": "3.67.0",
     "validator": "13.6.0",

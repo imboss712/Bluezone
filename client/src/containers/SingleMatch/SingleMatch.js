@@ -1,30 +1,27 @@
 import React, { lazy, Suspense, useRef, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { format } from 'date-fns';
-import { Helmet } from 'react-helmet-async';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import makeStyles from '@mui/styles/makeStyles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import * as actions from '../../store/actions/index';
+import BackButton from '../../ui/BackButton/BackButton';
+import HelmetComponent from '../../ui/HelmetComponent/HelmetComponent';
+import Loading from '../../ui/Loading/Loading';
+import SuspenseLoading from '../../ui/Loading/SuspenseLoading';
+import Modal from '../../ui/Modal/Modal';
 
-import MatchInfo from './MatchHelper/MatchInfo/MatchInfo';
-
-import BackButton from '../../components/BackButton/BackButton';
-import Loading from '../../components/Loading/Loading';
-import SuspenseLoading from '../../components/Loading/SuspenseLoading';
-import Modal from '../../components/Modal/Modal';
-
-import DeleteModal from './MatchHelper/MatchActions/MatchActionsHelper/DeleteModal';
-
-const Error = lazy(() => import('../../components/Error/Error'));
+import DeleteModal from './ComponentHelper/MatchActions/MatchActionsHelper/DeleteModal';
+import MatchInfo from './ComponentHelper/MatchInfo/MatchInfo';
+const Error = lazy(() => import('../../ui/Error/Error'));
 const MatchActions = lazy(() =>
-  import('./MatchHelper/MatchActions/MatchActions')
+  import('./ComponentHelper/MatchActions/MatchActions')
 );
-const TabGroup = lazy(() => import('./TabGroup'));
-const ShortInfo = lazy(() => import('./MatchHelper/ShortInfo/ShortInfo'));
+const TabGroup = lazy(() => import('./ComponentHelper/TabGroup'));
+const ShortInfo = lazy(() => import('./ComponentHelper/ShortInfo/ShortInfo'));
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,44 +77,12 @@ const SingleMatch = (props) => {
 
     return (
       <>
-        <Helmet>
-          <title>
-            Online {tournament.teamType} BGMI Tournament at {formattedMatchDate}{' '}
-            | Bluezone
-          </title>
-          <meta
-            name="description"
-            content={`The online ${tournament.teamType} BGMI tournament of Rs ${tournament.prizePool} prize pool will be played on ${formattedMatchDate} at ${formattedMatchTime} on the map of ${tournament.map}.`}
-          />
-          <link
-            rel="canonical"
-            href={`https://www.bluezone.fun/tournaments/${tournament._id}`}
-          />
-          <meta name="robots" content="index, follow" />
-          <meta property="og:locale" content="en_US" />
-          <meta property="og:type" content="website" />
-          <meta
-            property="og:title"
-            content={`Online ${tournament.teamType} BGMI Tournament at ${formattedMatchDate} | Bluezone`}
-          />
-          <meta
-            property="og:description"
-            content={`The online ${tournament.teamType} BGMI tournament of Rs ${tournament.prizePool} prize pool will be played on ${formattedMatchDate} at ${formattedMatchTime} on the map of ${tournament.map}.`}
-          />
-          <meta
-            property="og:url"
-            content={`https://www.bluezone.fun/tournaments/${tournament._id}`}
-          />
-          <meta name="twitter:card" content="summary" />
-          <meta
-            name="twitter:description"
-            content={`The online ${tournament.teamType} BGMI tournament of Rs ${tournament.prizePool} prize pool will be played on ${formattedMatchDate} at ${formattedMatchTime} on the map of ${tournament.map}.`}
-          />
-          <meta
-            name="twitter:title"
-            content={`Online ${tournament.teamType} BGMI Tournament at ${formattedMatchDate} | Bluezone`}
-          />
-        </Helmet>
+        <HelmetComponent
+          title={`Online ${tournament.teamType} BGMI Tournament at ${formattedMatchDate} | Bluezone`}
+          description={`The online ${tournament.teamType} BGMI tournament of Rs ${tournament.prizePool} prize pool will be played on ${formattedMatchDate} at ${formattedMatchTime} on the map of ${tournament.map}.`}
+          url={`https://www.bluezone.fun/tournaments/${tournament._id}`}
+          indexBehaviour="index, follow"
+        />
 
         <Box>
           <Container>

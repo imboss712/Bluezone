@@ -1,77 +1,30 @@
 import React, { lazy, Suspense } from 'react';
-import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import DateFnsUtils from '@date-io/date-fns';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import { Formik, Form, Field } from 'formik';
-import { TextField } from 'formik-material-ui';
-import { KeyboardDatePicker } from 'formik-material-ui-pickers';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import { Formik, Form, ErrorMessage } from 'formik';
+import DatePicker from '@mui/lab/DatePicker';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import PersonAddRoundedIcon from '@mui/icons-material/PersonAddRounded';
 
-import BackButton from '../../components/BackButton/BackButton';
+import { validationSchema } from './FormHelper/index';
 
-const LoginBox = lazy(() => import('./RegisterHelper/LoginBox'));
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 600,
-    margin: 'auto'
-  },
-  paper: {
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(3, 4),
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(2.8, 3)
-    },
-    [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(2.6, 2)
-    },
-    borderRadius: theme.spacing(0.75),
-    textAlign: 'center'
-  },
-  box: {
-    margin: theme.spacing(3, 4),
-    [theme.breakpoints.down('sm')]: {
-      margin: theme.spacing(2.8, 2.8)
-    },
-    [theme.breakpoints.down('xs')]: {
-      margin: theme.spacing(2.6, 1.5)
-    }
-  },
-  typography: {
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
-    color: theme.palette.text.secondary
-  },
-  agree: {
-    color: theme.palette.text.secondary,
-    fontSize: theme.spacing(1.74)
-  },
-  icon: {
-    marginLeft: theme.spacing(1),
-    color: theme.palette.text.secondary
-  },
-  userIcon: {
-    fontSize: theme.spacing(6),
-    color: '#3f51b5'
-  },
-  submitBtn: {
-    display: 'flex',
-    justifyContent: 'flex-end'
-  }
-}));
+import BackButton from '../../ui/BackButton/BackButton';
+import globalStyles from '../../ui/styles/globalStyles';
+import FormikField from '../../ui/FormComponents/FormikField';
+import FormikAdornment from '../../ui/FormComponents/FormikAdornment';
+import SubmitButton from '../../ui/SubmitButton/SubmitButton';
+const FormNavigation = lazy(() =>
+  import('../../ui/FormNavigation/FormNavigation')
+);
 
 const Register = (props) => {
-  const classes = useStyles();
+  const classes = globalStyles();
 
   const { initialValues, handleSubmit, edit } = props;
 
@@ -84,21 +37,15 @@ const Register = (props) => {
         />
 
         <Paper className={classes.paper} variant="outlined">
-          <PersonAddRoundedIcon className={classes.userIcon} />
+          <PersonAddRoundedIcon className={classes.headingIcon} />
 
-          <Typography className={classes.typography} variant="h5">
+          <Typography className={classes.headingText} variant="h5">
             <b>{edit ? 'Update Account' : 'Register to Bluezone'}</b>
           </Typography>
 
           <Formik
             initialValues={initialValues}
-            validationSchema={Yup.object({
-              name: Yup.string().required('Required').min(3).max(50),
-              dob: Yup.date().required('Required'),
-              phone: Yup.string()
-                .required('Required')
-                .matches(/^[6-9]\d{9}$/, 'Invalid Mobile Number')
-            })}
+            validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
                 setSubmitting(false);
@@ -106,60 +53,72 @@ const Register = (props) => {
               }, 500);
             }}
           >
-            {({ submitForm, isSubmitting, errors }) => (
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            {({
+              submitForm,
+              isSubmitting,
+              setFieldValue,
+              setFieldError,
+              setFieldTouched,
+              touched,
+              errors,
+              values
+            }) => (
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Form>
                   <Box className={classes.box}>
-                    <Field
-                      component={TextField}
-                      variant="outlined"
+                    <FormikField
                       name="name"
-                      type="text"
                       label="Name"
-                      autoComplete="name"
-                      fullWidth
+                      placeholder="Your Full Name"
+                      error={touched.name && errors.name ? true : false}
+                      disabled={isSubmitting}
                     />
                   </Box>
 
                   <Box className={classes.box}>
-                    <Field
-                      component={KeyboardDatePicker}
+                    <DatePicker
                       disableFuture
-                      autoOk
-                      openTo="year"
-                      inputVariant="outlined"
-                      format="dd-MM-yyyy"
-                      views={['year', 'month', 'date']}
-                      name="dob"
                       label="Date of Birth"
-                      placeholder="DD-MM-YYYY"
-                      InputAdornmentProps={{ position: 'end' }}
-                      autoComplete="bday"
-                      fullWidth
+                      inputFormat="dd/MM/yyyy"
+                      openTo="year"
+                      views={['year', 'month', 'day']}
+                      name="dob"
+                      value={values.dob}
+                      onChange={(value) => setFieldValue('dob', value)}
+                      onError={(value) => setFieldError('dob', value)}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          fullWidth
+                          error={touched.dob && errors.dob ? true : false}
+                          helperText={<ErrorMessage name="dob" />}
+                          onBlur={(value) => setFieldTouched('dob', value)}
+                        />
+                      )}
                     />
                   </Box>
 
                   <Box className={classes.box}>
-                    <Field
-                      component={TextField}
-                      variant="outlined"
+                    <FormikAdornment
                       name="phone"
-                      type="tel"
                       label="Mobile Number"
-                      disabled={edit ? true : false}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">+91</InputAdornment>
-                        )
-                      }}
-                      autoComplete="off"
-                      fullWidth
+                      error={touched.phone && errors.phone ? true : false}
+                      disabled={isSubmitting}
                     />
                   </Box>
 
                   {edit ? null : (
-                    <Box style={{ margin: '14px 33px' }}>
-                      <Typography className={classes.agree}>
+                    <Box
+                      sx={{
+                        marginTop: 1.75,
+                        marginRight: 4,
+                        marginBottom: 1.75,
+                        marginLeft: 4
+                      }}
+                    >
+                      <Typography
+                        sx={{ fontSize: 14, color: 'text.secondary' }}
+                      >
                         By signing up, you agree to our{' '}
                         <Link to="/policy/terms-of-use">Terms of Use</Link> and{' '}
                         <Link to="/policy/privacy">Privacy Policy</Link>
@@ -167,11 +126,14 @@ const Register = (props) => {
                     </Box>
                   )}
 
-                  <Box className={clsx(classes.box, classes.submitBtn)}>
-                    <Button
-                      size="large"
-                      variant="contained"
-                      color="primary"
+                  <Box className={clsx(classes.box, classes.submitButton)}>
+                    <SubmitButton
+                      createText="Create An Account"
+                      creatingText="Creating... "
+                      updateText="Update Account"
+                      updatingText="Updating... "
+                      isSubmitting={isSubmitting}
+                      edit={edit}
                       disabled={
                         isSubmitting ||
                         errors.name ||
@@ -181,32 +143,21 @@ const Register = (props) => {
                           : false
                       }
                       onClick={submitForm}
-                      disableElevation
-                    >
-                      {isSubmitting ? (
-                        <>
-                          {edit ? 'Updating... ' : 'Creating... '}
-                          <CircularProgress
-                            size={16}
-                            className={classes.icon}
-                          />
-                        </>
-                      ) : edit ? (
-                        'Update Account'
-                      ) : (
-                        'Create An Account'
-                      )}
-                    </Button>
+                    />
                   </Box>
                 </Form>
-              </MuiPickersUtilsProvider>
+              </LocalizationProvider>
             )}
           </Formik>
         </Paper>
 
         {edit ? null : (
           <Suspense>
-            <LoginBox />
+            <FormNavigation
+              text="Already have an account?"
+              link="/login"
+              linkText="Login"
+            />
           </Suspense>
         )}
       </Container>

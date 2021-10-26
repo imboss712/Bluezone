@@ -13,6 +13,8 @@ const profileRoutes = require('./routes/profiles');
 const matchRoutes = require('./routes/matches');
 const teamRoutes = require('./routes/teams');
 const transactionRoutes = require('./routes/transactions');
+const payoutRoutes = require('./routes/payouts');
+const bankRoutes = require('./routes/banks');
 const paymentRoutes = require('./routes/payments');
 const feedbackRoutes = require('./routes/feedbacks');
 
@@ -71,6 +73,8 @@ app.use('/api/profile', profileRoutes);
 app.use('/api', matchRoutes);
 app.use('/api', teamRoutes);
 app.use('/api/transactions', transactionRoutes);
+app.use('/api/payouts', payoutRoutes);
+app.use('/api/bank', bankRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/feedbacks', feedbackRoutes);
 

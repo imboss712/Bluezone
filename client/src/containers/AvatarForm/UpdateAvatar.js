@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
-import * as actions from '../../store/actions/index';
 import AvatarForm from './AvatarForm';
 
-import Loading from '../../components/Loading/Loading';
-const Error = lazy(() => import('../../components/Error/Error'));
+import * as actions from '../../store/actions/index';
+import Loading from '../../ui/Loading/Loading';
+const Error = lazy(() => import('../../ui/Error/Error'));
 
 const UpdateAvatar = (props) => {
   const {

@@ -1,19 +1,21 @@
 import React, { lazy, Suspense, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import AppBar from '@mui/material/AppBar';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import makeStyles from '@mui/styles/makeStyles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-import BackButton from '../../components/BackButton/BackButton';
-import SuspenseLoading from '../../components/Loading/SuspenseLoading';
+import BackButton from '../../ui/BackButton/BackButton';
+import SuspenseLoading from '../../ui/Loading/SuspenseLoading';
 
-const OpenMatches = lazy(() => import('./MyMatchesHelper/OpenMatches'));
+const OpenMatches = lazy(() =>
+  import('./ComponentHelper/MyMatchesHelper/OpenMatches')
+);
 const CompletedMatches = lazy(() =>
-  import('./MyMatchesHelper/CompletedMatches')
+  import('./ComponentHelper/MyMatchesHelper/CompletedMatches')
 );
 
 const useStyles = makeStyles((theme) => ({
@@ -23,13 +25,13 @@ const useStyles = makeStyles((theme) => ({
   },
   tabpanel: {
     padding: theme.spacing(3),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       padding: theme.spacing(2.75, 1.5)
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(2.5, 0.75)
     },
-    [theme.breakpoints.down(375)]: {
+    [theme.breakpoints.down(undefined)]: {
       padding: theme.spacing(2.5, 0.5)
     }
   },
@@ -96,7 +98,7 @@ const MyMatches = () => {
         <meta name="twitter:title" content="My Tournaments | Bluezone" />
       </Helmet>
 
-      <Box style={{ marginBottom: '16px' }}>
+      <Box sx={{ marginBottom: 2 }}>
         <Container>
           <BackButton link="/tournaments" text="Go To Tournaments" />
 
@@ -105,7 +107,7 @@ const MyMatches = () => {
               position="static"
               className={classes.appBar}
               elevation={0}
-              style={{ borderBottom: '1px solid rgb(224 224 224)' }}
+              sx={{ borderBottom: '1px solid rgb(224 224 224)' }}
             >
               <Tabs
                 value={value}
@@ -119,11 +121,13 @@ const MyMatches = () => {
                 <Tab label="Completed" {...a11yProps(1)} />
               </Tabs>
             </AppBar>
+
             <TabPanel value={value} index={0}>
               <Suspense fallback={<SuspenseLoading />}>
                 <OpenMatches />
               </Suspense>
             </TabPanel>
+
             <TabPanel value={value} index={1}>
               <Suspense fallback={<SuspenseLoading />}>
                 <CompletedMatches />

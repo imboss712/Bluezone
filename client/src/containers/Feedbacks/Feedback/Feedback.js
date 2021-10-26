@@ -1,22 +1,22 @@
 import React from 'react';
 import { format } from 'date-fns';
-import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 
-import red from '@material-ui/core/colors/red';
-import orange from '@material-ui/core/colors/orange';
-import green from '@material-ui/core/colors/green';
-import grey from '@material-ui/core/colors/grey';
+import red from '@mui/material/colors/red';
+import orange from '@mui/material/colors/orange';
+import green from '@mui/material/colors/green';
+import grey from '@mui/material/colors/grey';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(3, 4),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       margin: theme.spacing(2.9, 2.75)
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       margin: theme.spacing(2.8, 1.4)
     },
     textAlign: 'left'
@@ -27,11 +27,6 @@ const useStyles = makeStyles((theme) => ({
   section: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1)
-  },
-  date: {
-    color: theme.palette.text.secondary,
-    fontSize: theme.spacing(1.625),
-    marginTop: theme.spacing(0.2)
   }
 }));
 
@@ -65,20 +60,22 @@ const Feedback = (props) => {
   return (
     <Paper variant="outlined" className={classes.root}>
       <Box className={classes.box}>
-        <Box className={classes.section} style={{ display: 'flex' }}>
+        <Box className={classes.section} sx={{ display: 'flex' }}>
           <Typography>
             <b>Satisfied:</b>
           </Typography>
-          <Typography style={{ color: satisfyColor, marginLeft: '8px' }}>
+
+          <Typography sx={{ color: satisfyColor, marginLeft: 1 }}>
             <b>{satisfy}</b>
           </Typography>
         </Box>
 
-        <Box className={classes.section} style={{ display: 'flex' }}>
+        <Box className={classes.section} sx={{ display: 'flex' }}>
           <Typography>
             <b>Title:</b>
           </Typography>
-          <Typography color="primary" style={{ marginLeft: '8px' }}>
+
+          <Typography color="primary" sx={{ marginLeft: 1 }}>
             {title}
           </Typography>
         </Box>
@@ -87,6 +84,7 @@ const Feedback = (props) => {
           <Typography>
             <b>Reason:</b>
           </Typography>
+
           <Typography>{reason}</Typography>
         </Box>
 
@@ -94,14 +92,16 @@ const Feedback = (props) => {
           <Typography>
             <b>Suggestion:</b>
           </Typography>
+
           <Typography>{suggestion}.</Typography>
         </Box>
 
-        <Box className={classes.section} style={{ display: 'flex' }}>
+        <Box className={classes.section} sx={{ display: 'flex' }}>
           <Typography>
             <b>Created At:</b>
           </Typography>
-          <Typography color="textSecondary" style={{ marginLeft: '8px' }}>
+
+          <Typography color="textSecondary" sx={{ marginLeft: 1 }}>
             {format(new Date(createdAt), 'dd MMM yyyy')}
           </Typography>
         </Box>

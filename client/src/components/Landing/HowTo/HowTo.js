@@ -1,19 +1,19 @@
 import React from 'react';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import makeStyles from '@mui/styles/makeStyles';
 
-import HowToStepper from '../../HowToPlay/HowToStepper';
+import HowToStepper from '../../HowToPlay/ComponentHelper/HowToStepper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(5),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingTop: theme.spacing(4.75)
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(4.5)
     }
   },
@@ -22,15 +22,15 @@ const useStyles = makeStyles((theme) => ({
     margin: '16px auto',
     textAlign: 'center'
   },
-  typography: {
+  heading: {
     color: '#282828',
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: theme.spacing(4),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       fontSize: theme.spacing(3.8)
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.6)
     }
   }
@@ -44,7 +44,7 @@ const HowTo = () => {
       <Container>
         <Typography
           variant="h2"
-          className={classes.typography}
+          className={classes.heading}
           title="Bluezone How To Play"
         >
           HOW TO PLAY
@@ -53,6 +53,7 @@ const HowTo = () => {
         <Box className={classes.stepper}>
           <HowToStepper />
         </Box>
+
         <Divider />
       </Container>
     </Box>

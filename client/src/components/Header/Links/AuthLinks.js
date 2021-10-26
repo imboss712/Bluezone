@@ -2,35 +2,20 @@ import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import clsx from 'clsx';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import Avatar from '@material-ui/core/Avatar';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import { makeStyles } from '@material-ui/core/styles';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import IconButton from '@mui/material/IconButton';
+import Avatar from '@mui/material/Avatar';
 
 import * as actions from '../../../store/actions/index';
+import headerStyle from '../../../ui/styles/headerStyles';
 
 import AdminLinks from './AdminLinks';
-// import AllLinks from './AllLinks';
-import Modal from '../../Modal/Modal';
-
-const useStyles = makeStyles((theme) => ({
-  buttonRight: {
-    marginRight: theme.spacing(1.25)
-  },
-  btnLink: {
-    textDecoration: 'none'
-  },
-  avatar: {
-    width: theme.spacing(3),
-    height: theme.spacing(3),
-    backgroundColor: '#3f51b5'
-  }
-}));
+import Modal from '../../../ui/Modal/Modal';
 
 const AuthLinks = (props) => {
-  const classes = useStyles();
+  const classes = headerStyle();
 
   const modalRef = useRef();
 
@@ -92,30 +77,29 @@ const AuthLinks = (props) => {
 
       <NavLink
         to="/tournaments"
-        className={clsx(classes.btnLink, classes.buttonRight)}
+        className={clsx(classes.buttonLink, classes.buttonRight)}
       >
         <Button color="primary">Tournaments</Button>
       </NavLink>
 
       <NavLink
         to="/my-tournaments"
-        className={clsx(classes.btnLink, classes.buttonRight)}
+        className={clsx(classes.buttonLink, classes.buttonRight)}
       >
         <Button color="primary">My Tournaments</Button>
       </NavLink>
-
-      {/* <AllLinks /> */}
 
       <IconButton
         color="primary"
         aria-controls="profile-menu"
         aria-haspopup="true"
         onClick={handleClick}
+        size="large"
       >
         {avatar !== null ? (
           <Avatar
             src={`data:image/png;base64,${avatar}`}
-            alt={user ? (user.name ? user.name : 'profile') : 'profile'}
+            alt={user && user.name}
             className={classes.avatar}
           />
         ) : (
@@ -124,11 +108,7 @@ const AuthLinks = (props) => {
             className={classes.avatar}
           >
             <span style={{ fontSize: '14px' }}>
-              {user
-                ? user.name
-                  ? user.name.charAt(0).toUpperCase()
-                  : 'A'
-                : 'A'}
+              {user && user.name.charAt(0).toUpperCase()}
             </span>
           </Avatar>
         )}
@@ -141,15 +121,15 @@ const AuthLinks = (props) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <Link to="/dashboard" className={classes.btnLink}>
+        <Link to="/dashboard" className={classes.buttonLink}>
           <MenuItem onClick={handleClose}>My Profile</MenuItem>
         </Link>
 
-        <Link to="/wallet" className={classes.btnLink}>
+        <Link to="/wallet" className={classes.buttonLink}>
           <MenuItem onClick={handleClose}>My Wallet</MenuItem>
         </Link>
 
-        <Link to="/edit-dashboard" className={classes.btnLink}>
+        <Link to="/edit-dashboard" className={classes.buttonLink}>
           <MenuItem onClick={handleClose}>Edit Profile</MenuItem>
         </Link>
 

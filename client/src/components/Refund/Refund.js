@@ -1,91 +1,44 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 
-import BackButton from '../BackButton/BackButton';
-
-const useStyles = makeStyles((theme) => ({
-  heading: {
-    fontSize: theme.spacing(4),
-    lineHeight: 1.3,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    margin: theme.spacing(1.5, 0)
-  },
-  para: {
-    marginTop: theme.spacing(1.5)
-  }
-}));
+import HelmetComponent from '../../ui/HelmetComponent/HelmetComponent';
+import BackButton from '../../ui/BackButton/BackButton';
+import componentStyle from '../../ui/styles/componentStyle';
 
 const Refund = () => {
-  const classes = useStyles();
+  const classes = componentStyle();
 
   return (
     <>
-      <Helmet>
-        <title>Refund Policy | Online BGMI Tournament - Bluezone</title>
-        <meta
-          name="description"
-          content="Our aim and motto is to satisfy the customers. If you are unhappy
-            with the services provided, we will refund the money, provided the
-            reasons are genuine."
-        />
-        <link
-          rel="canonical"
-          href="https://www.bluezone.fun/policy/refund-policy"
-        />
-        <meta name="robots" content="index, follow" />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:type" content="article" />
-        <meta
-          property="og:title"
-          content="Refund Policy | Online BGMI Tournament - Bluezone"
-        />
-        <meta
-          property="og:description"
-          content="Our aim and motto is to satisfy the customers. If you are unhappy
-            with the services provided, we will refund the money, provided the
-            reasons are genuine."
-        />
-        <meta
-          property="og:url"
-          content="https://www.bluezone.fun/policy/refund-policy"
-        />
-        <meta name="twitter:card" content="summary" />
-        <meta
-          name="twitter:description"
-          content="Our aim and motto is to satisfy the customers. If you are unhappy
-            with the services provided, we will refund the money, provided the
-            reasons are genuine."
-        />
-        <meta
-          name="twitter:title"
-          content="Refund Policy | Online BGMI Tournament - Bluezone"
-        />
-      </Helmet>
+      <HelmetComponent
+        title="Refund Policy | Online BGMI Tournament - Bluezone"
+        description="Our aim and motto is to satisfy the customers. If you are unhappy with the services provided, we will refund the money, provided the reasons are genuine."
+        url="https://www.bluezone.fun/policy/refund-policy"
+        indexBehaviour="index, follow"
+      />
 
       <Box>
         <Container>
           <BackButton link="/" text="Back To Home" />
+
           <Typography variant="h1" className={classes.heading}>
             Refund Policy
           </Typography>
 
-          <Typography className={classes.para}>
+          <Typography className={classes.text}>
             Our aim and motto is to satisfy the customers. If you are unhappy
             with the services provided, we will refund the money, provided the
             reasons are genuine and proven after investigation.
           </Typography>
 
-          <Typography className={classes.para}>
+          <Typography className={classes.text}>
             In the event of being unsatisfied with our services, customers are
             free to cancel the service and request a refund from us. Our policy
             for cancellation and refund will be as follows:
@@ -107,7 +60,7 @@ const Refund = () => {
             </ListItem>
           </List>
 
-          <Typography className={classes.para}>NON Refundable:</Typography>
+          <Typography className={classes.text}>NON Refundable:</Typography>
 
           <List>
             <ListItem>
@@ -125,7 +78,7 @@ const Refund = () => {
             </ListItem>
           </List>
 
-          <Typography className={classes.para} style={{ fontSize: '17px' }}>
+          <Typography className={classes.text} sx={{ fontSize: 17 }}>
             If you have any questions about our refund policy or refund terms,
             you can write your query freely at{' '}
             <a

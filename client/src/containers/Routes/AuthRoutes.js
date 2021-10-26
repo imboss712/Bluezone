@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Loading from '../../components/Loading/Loading';
+import Loading from '../../ui/Loading/Loading';
 
 const AuthRoutes = (props) => {
   const {

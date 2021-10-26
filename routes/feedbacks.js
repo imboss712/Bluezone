@@ -21,13 +21,13 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Read last 20 feedbacks (Admin Route)
+// Read last 10 feedbacks (Admin Route)
 router.get('/', auth, authAdmin, async (req, res) => {
   try {
     const feedbacks = await Feedback.find()
       .lean()
       .sort({ createdAt: -1 })
-      .limit(20);
+      .limit(10);
 
     res.send(feedbacks);
   } catch (err) {

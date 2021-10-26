@@ -48,8 +48,15 @@ export {
   postResult
 } from './team';
 
-export { getTransactions, getPayouts } from './transaction';
+export { getTransactions, getPayouts } from './wallet';
 
-export { getPayoutRequests, sendPayoutLink } from './payout';
+export {
+  getBankDetails,
+  getBankDetailById,
+  createBankDetails,
+  editBankDetails
+} from './bank';
+
+export { getWithdrawalRequests, sendPayout } from './withdrawal';
 
 export { createFeedback, getFeedbacks } from './feedback';

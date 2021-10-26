@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import makeStyles from '@mui/styles/makeStyles';
+
+import ProfileContent from './ComponentHelper/ProfileContent';
+import WalletBalance from './ComponentHelper/WalletBalance';
+import WalletHistory from './ComponentHelper/WalletHistory';
 
 import * as actions from '../../store/actions/index';
+import BackButton from '../../ui/BackButton/BackButton';
+import Loading from '../../ui/Loading/Loading';
 
-import BackButton from '../../components/BackButton/BackButton';
-import Loading from '../../components/Loading/Loading';
-import Error from '../../components/Error/Error';
-
-import Intro from './WalletSection/Intro';
-import Amount from './WalletSection/Amount';
-import WalletSection from './WalletSection/WalletSection';
+const Error = lazy(() => import('../../ui/Error/Error'));
 
 const useStyles = makeStyles((theme) => ({
   leftBar: {
@@ -24,16 +24,17 @@ const useStyles = makeStyles((theme) => ({
     position: 'sticky',
     top: 10,
     bottom: 10,
-    zIndex: 5
+    zIndex: 5,
+    textAlign: 'center'
   },
-  rightBarOne: {
+  topRightBar: {
     padding: theme.spacing(2.5),
     marginTop: theme.spacing(1)
   },
-  rightBarTwo: {
+  bottomRightBar: {
     marginTop: theme.spacing(2),
     padding: theme.spacing(1.5, 2.5),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(1.5, 2)
     }
   }
@@ -60,12 +61,14 @@ const Wallet = (props) => {
 
   if (profile === null && profileError && profileError.status) {
     profileContent = (
-      <Error status={profileError.status} statusText={profileError.msg} />
+      <Suspense>
+        <Error status={profileError.status} statusText={profileError.msg} />
+      </Suspense>
     );
   }
 
   if (profile) {
-    profileContent = <Intro profile={profile} user={user} />;
+    profileContent = <ProfileContent profile={profile} user={user} />;
   }
 
   return (
@@ -96,12 +99,12 @@ const Wallet = (props) => {
             </Grid>
 
             <Grid item xs={12} md={10} lg={8}>
-              <Paper variant="outlined" className={classes.rightBarOne}>
-                <Amount />
+              <Paper variant="outlined" className={classes.topRightBar}>
+                <WalletBalance />
               </Paper>
 
-              <Paper variant="outlined" className={classes.rightBarTwo}>
-                <WalletSection />
+              <Paper variant="outlined" className={classes.bottomRightBar}>
+                <WalletHistory />
               </Paper>
             </Grid>
           </Grid>

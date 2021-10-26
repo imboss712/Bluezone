@@ -1,6 +1,5 @@
 const express = require('express');
 const multer = require('multer');
-const normalize = require('normalize-url');
 
 const auth = require('../middleware/auth');
 
@@ -28,15 +27,6 @@ router.post('/', auth, async (req, res) => {
     }
 
     const profile = new Profile({ ...req.body, user: req.user._id });
-
-    const socialFields = Object.keys(req.body.social);
-    socialFields.forEach((link) => {
-      if (req.body.social[`${link}`] !== '') {
-        profile.social[`${link}`] = normalize(req.body.social[`${link}`], {
-          forceHttps: true
-        });
-      }
-    });
 
     req.user.isProfile = true;
 
@@ -87,16 +77,7 @@ router.get('/user/:userId', auth, async (req, res) => {
 // Update Own Profile
 router.patch('/me', auth, async (req, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = [
-    'gameName',
-    'gameId',
-    'bio',
-    'favoriteGun',
-    'role',
-    'stats',
-    'address',
-    'social'
-  ];
+  const allowedUpdates = ['gameName', 'gameId', 'bio'];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
   );
@@ -117,16 +98,6 @@ router.patch('/me', auth, async (req, res) => {
 
     // eslint-disable-next-line security/detect-object-injection
     updates.forEach((update) => (profile[update] = req.body[update]));
-    if (updates.includes('social')) {
-      const socialFields = Object.keys(req.body.social);
-      socialFields.forEach((link) => {
-        if (req.body.social[`${link}`] !== '') {
-          profile.social[`${link}`] = normalize(req.body.social[`${link}`], {
-            forceHttps: true
-          });
-        }
-      });
-    }
 
     await profile.save();
 

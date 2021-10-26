@@ -1,37 +1,25 @@
 import React from 'react';
-import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import Button from '@mui/material/Button';
 
-// import AllLinks from './AllLinks';
-
-const useStyles = makeStyles((theme) => ({
-  buttonRight: {
-    marginRight: theme.spacing(2)
-  },
-  btnLink: {
-    textDecoration: 'none'
-  }
-}));
+import headerStyle from '../../../ui/styles/headerStyles';
 
 const GuestLinks = () => {
-  const classes = useStyles();
+  const classes = headerStyle();
 
   return (
     <>
-      {/* <AllLinks expandable /> */}
-
       <NavLink
         to="/login"
-        className={clsx(classes.btnLink, classes.buttonRight)}
+        className={clsx(classes.buttonLink, classes.buttonRight)}
       >
         <Button color="primary" variant="outlined">
           Login
         </Button>
       </NavLink>
 
-      <NavLink to="/register" className={classes.btnLink}>
+      <NavLink to="/register" className={classes.buttonLink}>
         <Button variant="contained" color="primary" disableElevation>
           Sign Up
         </Button>

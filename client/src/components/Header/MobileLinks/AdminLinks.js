@@ -1,31 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import MoneyOutlinedIcon from '@mui/icons-material/MoneyOutlined';
+import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
 
-import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
-import MoneyOutlinedIcon from '@material-ui/icons/MoneyOutlined';
-import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
-
-const useStyles = makeStyles((theme) => ({
-  btnLink: {
-    textDecoration: 'none'
-  },
-  divider: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
-  }
-}));
+import headerStyle from '../../../ui/styles/headerStyles';
 
 const AdminLinks = () => {
-  const classes = useStyles();
+  const classes = headerStyle();
 
   return (
     <>
-      <Link to="/host-tournament" className={classes.btnLink}>
+      <Link to="/host-tournament" className={classes.buttonLink}>
         <ListItem button>
           <ListItemIcon>
             <AddCircleOutlineOutlinedIcon color="primary" />
@@ -34,16 +24,16 @@ const AdminLinks = () => {
         </ListItem>
       </Link>
 
-      <Link to="/payout-requests" className={classes.btnLink}>
+      <Link to="/withdrawal-requests" className={classes.buttonLink}>
         <ListItem button>
           <ListItemIcon>
             <MoneyOutlinedIcon color="primary" />
           </ListItemIcon>
-          <ListItemText primary="Payout Requests" />
+          <ListItemText primary="Withdrawal Requests" />
         </ListItem>
       </Link>
 
-      <Link to="/users-feedback" className={classes.btnLink}>
+      <Link to="/users-feedback" className={classes.buttonLink}>
         <ListItem button>
           <ListItemIcon>
             <FeedbackOutlinedIcon color="primary" />

@@ -66,7 +66,6 @@ const teamReducer = (state = initialState, action) => {
       return { ...state, team: payload, loadingTeam: false, teamError: {} };
     case TEAM_ERROR:
       return { ...state, teamError: payload, loadingTeam: false };
-
     case TEAMS_ERROR:
       return { ...state, teamsError: payload, loadingTeams: false };
     default:

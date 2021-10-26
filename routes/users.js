@@ -1,5 +1,4 @@
 const express = require('express');
-const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const intervalToDuration = require('date-fns/intervalToDuration');
 
@@ -16,7 +15,9 @@ const User = require('../models/User');
 const Profile = require('../models/Profile');
 const Match = require('../models/Match');
 const Team = require('../models/Team');
+const Bank = require('../models/Bank');
 const Transaction = require('../models/Transaction');
+const Payout = require('../models/Payout');
 
 const {
   validateRegisterInput,
@@ -279,7 +280,7 @@ router.post('/request-money', auth, async (req, res) => {
       from: 'Wallet',
       to: 'Bank',
       type: 'Debited',
-      subType: 'Withdraw',
+      subType: 'Withdraw Request',
       paymentAmount: requestedAmount,
       user: req.user._id
     });
@@ -299,6 +300,7 @@ router.get('/withdrawal-requets', auth, authAdmin, async (req, res) => {
       .select({
         name: 1,
         phone: 1,
+        isBank: 1,
         requestedAmount: 1
       })
       .lean();
@@ -308,88 +310,34 @@ router.get('/withdrawal-requets', auth, authAdmin, async (req, res) => {
   }
 });
 
-// Send payout link to a user (Admin Route)
-router.post('/send-payout-link', auth, authAdmin, async (req, res) => {
-  const { phone } = req.body;
+// Send payout to a user (Admin Route)
+router.post('/send-payout', auth, authAdmin, async (req, res) => {
+  const { userId, to, amount } = req.body;
 
   try {
-    const user = await User.findOne({ phone }).select({
-      name: 1,
-      phone: 1,
-      requestedAmount: 1
-    });
+    const user = await User.findById(userId).select({ requestedAmount: 1 });
 
     if (!user) {
       return res.status(404).send({ errors: [{ msg: 'User not found' }] });
     }
 
-    const options = {
-      account_number: process.env.RAZORPAY_ACCOUNT_NUMBER,
-      contact: {
-        name: user.name,
-        contact: user.phone,
-        type: 'customer'
-      },
-      amount: user.requestedAmount * 100,
-      currency: 'INR',
-      purpose: 'payout',
-      description: `Payout link for ${user.name}`,
-      send_sms: true
-    };
+    user.requestedAmount = 0;
 
-    const PAYOUT_LINK_URL = 'https://api.razorpay.com/v1/payout-links';
-
-    const payout_link = await axios.post(PAYOUT_LINK_URL, options, {
-      headers: { 'Content-Type': 'application/json' },
-      auth: {
-        username: process.env.RAZORPAY_KEY_ID,
-        password: process.env.RAZORPAY_KEY_SECRET
-      }
+    const payout = new Payout({
+      to: to,
+      amount: amount,
+      user: user._id
     });
 
-    if (!payout_link || payout_link.status !== 'issued') {
-      return res
-        .status(400)
-        .send({ errors: [{ msg: 'Failed to generate payout link' }] });
-    }
+    const [updatedUser] = await Promise.all([user.save(), payout.save()]);
 
-    user.requestedAmount = 0;
-    await user.save();
-
-    res.send(user);
+    res.send(updatedUser);
   } catch (err) {
     res.status(400).send(err);
   }
 });
 
-// My Payout links
-router.get('/my-payout-links', auth, async (req, res) => {
-  try {
-    const user = await User.findById(req.user._id).select({ phone: 1 }).lean();
-
-    const MY_PAYOUT_LINKS_URL = 'https://api.razorpay.com/v1/payout-links';
-
-    const links = await axios.get(
-      MY_PAYOUT_LINKS_URL,
-      {
-        params: { contact_phone_number: user.phone }
-      },
-      {
-        headers: { 'Content-Type': 'application/json' },
-        auth: {
-          username: process.env.RAZORPAY_KEY_ID,
-          password: process.env.RAZORPAY_KEY_SECRET
-        }
-      }
-    );
-
-    res.send(links);
-  } catch (err) {
-    res.status(500).send();
-  }
-});
-
-// Delete User (Delete Profile, Hosted Match (if Admin), Team and Participated Match)
+// Delete User (Delete Profile, Bank, Match, Team, Transaction, Payout)
 router.delete('/me', auth, async (req, res) => {
   try {
     if (req.user.role === 'admin') {
@@ -429,8 +377,11 @@ router.delete('/me', auth, async (req, res) => {
       }
     }
 
-    const [, user] = await Promise.all([
+    const [, , , , user] = await Promise.all([
       Profile.deleteOne({ user: req.user._id }),
+      Bank.deleteOne({ user: req.user._id }),
+      Transaction.deleteMany({ user: req.user._id }),
+      Payout.deleteMany({ user: req.user._id }),
       req.user.remove()
     ]);
 

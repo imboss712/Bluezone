@@ -40,6 +40,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
+    isBank: {
+      type: Boolean,
+      default: false
+    },
     hasAvatar: {
       type: Boolean,
       default: false

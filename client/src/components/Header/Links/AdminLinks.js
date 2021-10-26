@@ -1,26 +1,14 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import UnfoldMoreRoundedIcon from '@material-ui/icons/UnfoldMoreRounded';
-import { makeStyles } from '@material-ui/core/styles';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import UnfoldMoreRoundedIcon from '@mui/icons-material/UnfoldMoreRounded';
 
-const useStyles = makeStyles((theme) => ({
-  buttonRight: {
-    marginRight: theme.spacing(2)
-  },
-  btnLink: {
-    textDecoration: 'none'
-  },
-  expandIcon: {
-    fontSize: theme.spacing(2),
-    marginLeft: theme.spacing(0.5)
-  }
-}));
+import headerStyle from '../../../ui/styles/headerStyles';
 
 const AdminLinks = () => {
-  const classes = useStyles();
+  const classes = headerStyle();
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -51,15 +39,15 @@ const AdminLinks = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <NavLink to="/host-tournament" className={classes.btnLink}>
+        <NavLink to="/host-tournament" className={classes.buttonLink}>
           <MenuItem onClick={handleClose}>Host A Tournament</MenuItem>
         </NavLink>
 
-        <NavLink to="/payout-requests" className={classes.btnLink}>
-          <MenuItem onClick={handleClose}>Payout Requests</MenuItem>
+        <NavLink to="/withdrawal-requests" className={classes.buttonLink}>
+          <MenuItem onClick={handleClose}>Withdrawal Requests</MenuItem>
         </NavLink>
 
-        <NavLink to="/users-feedback" className={classes.btnLink}>
+        <NavLink to="/users-feedback" className={classes.buttonLink}>
           <MenuItem onClick={handleClose}>Feedbacks</MenuItem>
         </NavLink>
       </Menu>

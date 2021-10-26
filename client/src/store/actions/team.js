@@ -150,6 +150,12 @@ export const getMyTeam = (matchId) => async (dispatch) => {
       payload: res.data
     });
   } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+    }
+
     dispatch({
       type: TEAM_ERROR,
       payload: {
