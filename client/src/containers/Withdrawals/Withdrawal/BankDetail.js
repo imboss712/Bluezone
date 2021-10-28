@@ -27,7 +27,7 @@ const TableLine = (props) => {
   return (
     <TableRow>
       <TableCell>{keyName}</TableCell>
-      <TableCell align="right" style={{ color: '#0d47a1' }}>
+      <TableCell align="right" sx={{ color: '#0D47A1' }}>
         {valueName}
       </TableCell>
     </TableRow>
@@ -46,7 +46,7 @@ const TableWrapper = (props) => {
       </Typography>
 
       <TableContainer component={Paper} variant="outlined" elevation={0}>
-        <Table sx={{ width: '100%' }}>
+        <Table sx={{ width: 1 }}>
           <TableBody>
             {items.map((item) => (
               <TableLine

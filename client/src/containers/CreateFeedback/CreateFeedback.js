@@ -91,7 +91,10 @@ const CreateFeedback = (props) => {
           <BackButton link="/" text="Back To Home" />
 
           <Paper className={sharedClasses.paper} variant="outlined">
-            <FeedbackRoundedIcon className={sharedClasses.headingIcon} />
+            <FeedbackRoundedIcon
+              color="primary"
+              className={sharedClasses.headingIcon}
+            />
 
             <Typography className={sharedClasses.headingText} variant="h5">
               <b>Send Feedback</b>

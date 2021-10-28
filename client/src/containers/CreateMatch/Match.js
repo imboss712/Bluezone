@@ -51,7 +51,10 @@ const Match = (props) => {
         />
 
         <Paper className={sharedClasses.paper} variant="outlined">
-          <SportsEsportsRoundedIcon className={sharedClasses.headingIcon} />
+          <SportsEsportsRoundedIcon
+            color="primary"
+            className={sharedClasses.headingIcon}
+          />
 
           <Typography className={sharedClasses.headingText} variant="h5">
             <b>{edit ? 'Update Tournament' : 'Host a Tournament'}</b>

@@ -39,7 +39,7 @@ const ExitModal = (props) => {
               <b>Current Balance:</b>
             </Typography>
 
-            <Typography color="secondary" style={{ marginLeft: 'auto' }}>
+            <Typography color="secondary" sx={{ marginLeft: 'auto' }}>
               <b>Rs. {user.amount}</b>
             </Typography>
           </Box>
@@ -53,7 +53,7 @@ const ExitModal = (props) => {
           <b>Refund Amount:</b>
         </Typography>
 
-        <Typography style={{ marginLeft: 'auto' }}>
+        <Typography sx={{ marginLeft: 'auto' }}>
           <b>Rs. {entryFees * 0.9}</b>
         </Typography>
       </Box>

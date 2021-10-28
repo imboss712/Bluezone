@@ -27,7 +27,10 @@ const Details = (props) => {
         <BackButton link="/wallet" text="Back To Wallet" />
 
         <Paper className={classes.paper} variant="outlined">
-          <AccountBalanceRoundedIcon className={classes.headingIcon} />
+          <AccountBalanceRoundedIcon
+            color="primary"
+            className={classes.headingIcon}
+          />
 
           <Typography className={classes.headingText} variant="h5">
             <b>{edit ? 'Edit Bank Details' : 'Add Bank Details'}</b>

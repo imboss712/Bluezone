@@ -240,12 +240,19 @@ const TermsOfUse = () => {
               target="_blank"
               rel="noopener noreferrer"
               href="mailto:care.bluezone@gmail.com"
+              style={{ color: '#1976D2' }}
             >
               care.bluezone@gmail.com
             </a>
             . You can also contact us through{' '}
-            <Link to="/about/contact-us">Contact</Link> page or{' '}
-            <Link to="/about/feedback">Feedback</Link> page.
+            <Link to="/about/contact-us" className={classes.linkColor}>
+              Contact
+            </Link>{' '}
+            page or{' '}
+            <Link to="/about/feedback" className={classes.linkColor}>
+              Feedback
+            </Link>{' '}
+            page.
           </Typography>
         </Container>
       </Box>

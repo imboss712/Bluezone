@@ -58,7 +58,10 @@ const AvatarForm = (props) => {
           variant="outlined"
           sx={{ marginTop: edit ? 2 : 4 }}
         >
-          <InsertPhotoRoundedIcon className={sharedClasses.headingIcon} />
+          <InsertPhotoRoundedIcon
+            color="primary"
+            className={sharedClasses.headingIcon}
+          />
 
           <Typography className={sharedClasses.headingText} variant="h5">
             <b>{edit ? 'Update Profile Picture' : 'Upload Profile Picture'}</b>

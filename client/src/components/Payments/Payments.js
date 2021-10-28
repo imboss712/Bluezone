@@ -45,6 +45,7 @@ const Payments = () => {
               target="_blank"
               rel="noopener noreferrer"
               href="https://razorpay.com/"
+              style={{ color: '#1976D2' }}
             >
               Razorpay
             </a>{' '}
@@ -53,6 +54,7 @@ const Payments = () => {
               target="_blank"
               rel="noopener noreferrer"
               href="https://razorpay.com/terms/"
+              style={{ color: '#1976D2' }}
             >
               Terms &amp; Conditions
             </a>{' '}
@@ -61,6 +63,7 @@ const Payments = () => {
               target="_blank"
               rel="noopener noreferrer"
               href="https://razorpay.com/privacy/"
+              style={{ color: '#1976D2' }}
             >
               Privacy Policy
             </a>

@@ -52,7 +52,10 @@ const Login = (props) => {
           <BackButton link="/" text="Back To Home" />
 
           <Paper className={sharedClasses.paper} variant="outlined">
-            <VerifiedUserRoundedIcon className={sharedClasses.headingIcon} />
+            <VerifiedUserRoundedIcon
+              color="primary"
+              className={sharedClasses.headingIcon}
+            />
 
             <Typography className={sharedClasses.headingText} variant="h5">
               <b>Login to Bluezone</b>

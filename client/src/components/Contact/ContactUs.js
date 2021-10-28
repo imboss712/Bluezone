@@ -78,6 +78,7 @@ const ContactUs = () => {
 
           <Paper className={sharedClasses.paper} variant="outlined">
             <PermContactCalendarRoundedIcon
+              color="primary"
               className={sharedClasses.headingIcon}
             />
 

@@ -32,8 +32,7 @@ const globalStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary
   },
   headingIcon: {
-    fontSize: theme.spacing(6),
-    color: '#3f51b5'
+    fontSize: theme.spacing(6)
   },
   submitButton: {
     display: 'flex',

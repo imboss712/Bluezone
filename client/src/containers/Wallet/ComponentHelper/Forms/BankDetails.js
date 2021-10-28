@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     },
     borderRadius: theme.spacing(0.75),
     textAlign: 'center'
+  },
+  linkColor: {
+    color: '#1976D2'
   }
 }));
 
@@ -41,7 +44,7 @@ const TableLine = (props) => {
   return (
     <TableRow>
       <TableCell>{keyName}</TableCell>
-      <TableCell align="right" style={{ color: '#0d47a1' }}>
+      <TableCell align="right" sx={{ color: '#0D47A1' }}>
         {valueName}
       </TableCell>
     </TableRow>
@@ -60,7 +63,7 @@ const TableWrapper = (props) => {
       </Typography>
 
       <TableContainer component={Paper} variant="outlined" elevation={0}>
-        <Table sx={{ width: '100%' }}>
+        <Table sx={{ width: 1 }}>
           <TableBody>
             {items.map((item) => (
               <TableLine
@@ -161,7 +164,9 @@ const BankDetails = (props) => {
         <Box className={sharedClasses.box} sx={{ textAlign: 'left' }}>
           <Typography sx={{ fontSize: 14, marginLeft: 0.5 }}>
             Amount will be credited to this account.{' '}
-            <Link to="/edit-bank-details">Click here to change</Link>
+            <Link to="/edit-bank-details" className={classes.linkColor}>
+              Click here to change
+            </Link>
           </Typography>
         </Box>
 

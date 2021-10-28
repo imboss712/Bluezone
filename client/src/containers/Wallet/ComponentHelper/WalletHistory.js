@@ -1,5 +1,4 @@
-import React, { lazy, Suspense, useState } from 'react';
-import AppBar from '@mui/material/AppBar';
+import React, { useState, lazy, Suspense } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -11,21 +10,17 @@ const Transactions = lazy(() => import('./Transactions/Transactions'));
 const Payouts = lazy(() => import('./Payouts/Payouts'));
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper
-  },
   tabpanel: {
     padding: theme.spacing(3),
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(2.9, 2.5)
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(2.7, 1.5)
     },
-    [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(2.9, 2)
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2.4, 0.7)
     }
   },
-  appBar: {
-    backgroundColor: 'white',
+  tabheader: {
+    backgroundColor: '#FFFFFF',
     marginTop: theme.spacing(1),
     position: 'sticky',
     top: 0,
@@ -69,26 +64,21 @@ const WalletHistory = () => {
   };
 
   return (
-    <Box className={classes.root}>
-      <AppBar
-        position="static"
-        className={classes.appBar}
-        elevation={0}
-        sx={{
-          borderBottom: 1,
-          borderColor: '#e0e0e0'
-        }}
+    <Box sx={{ width: '100%' }}>
+      <Box
+        sx={{ borderBottom: 1, borderColor: 'divider' }}
+        className={classes.tabheader}
       >
         <Tabs
           value={value}
           onChange={handleChange}
-          aria-label="wallet transactions"
+          aria-label="wallet tabs"
           centered
         >
           <Tab label="Transactions" {...a11yProps(0)} />
           <Tab label="Payouts" {...a11yProps(1)} />
         </Tabs>
-      </AppBar>
+      </Box>
 
       <TabPanel value={value} index={0}>
         <Suspense fallback={<SuspenseLoading />}>

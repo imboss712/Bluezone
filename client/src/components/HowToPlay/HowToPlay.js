@@ -28,7 +28,7 @@ const HowToPlay = () => {
           <BackButton link="/" text="Back To Home" />
 
           <Paper className={classes.paper} variant="outlined">
-            <HelpRoundedIcon className={classes.headingIcon} />
+            <HelpRoundedIcon color="primary" className={classes.headingIcon} />
 
             <Typography className={classes.headingText} variant="h5">
               <b>How To Play</b>

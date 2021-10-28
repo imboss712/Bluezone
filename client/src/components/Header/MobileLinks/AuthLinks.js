@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -41,7 +42,10 @@ const AuthLinks = (props) => {
           <AdminLinks />
         ) : null}
 
-        <Link to="/tournaments" className={classes.buttonLink}>
+        <Link
+          to="/tournaments"
+          className={clsx(classes.buttonLink, classes.linkColor)}
+        >
           <ListItem button>
             <ListItemIcon>
               <SportsEsportsOutlinedIcon color="primary" />
@@ -50,7 +54,10 @@ const AuthLinks = (props) => {
           </ListItem>
         </Link>
 
-        <Link to="/my-tournaments" className={classes.buttonLink}>
+        <Link
+          to="/my-tournaments"
+          className={clsx(classes.buttonLink, classes.linkColor)}
+        >
           <ListItem button>
             <ListItemIcon>
               <StarBorderOutlinedIcon color="primary" />
@@ -61,7 +68,10 @@ const AuthLinks = (props) => {
 
         <Divider variant="middle" className={classes.divider} />
 
-        <Link to="/dashboard" className={classes.buttonLink}>
+        <Link
+          to="/dashboard"
+          className={clsx(classes.buttonLink, classes.linkColor)}
+        >
           <ListItem button>
             <ListItemIcon>
               <AccountCircleOutlinedIcon color="primary" />
@@ -70,7 +80,10 @@ const AuthLinks = (props) => {
           </ListItem>
         </Link>
 
-        <Link to="/wallet" className={classes.buttonLink}>
+        <Link
+          to="/wallet"
+          className={clsx(classes.buttonLink, classes.linkColor)}
+        >
           <ListItem button>
             <ListItemIcon>
               <AccountBalanceWalletOutlinedIcon color="primary" />
@@ -79,7 +92,10 @@ const AuthLinks = (props) => {
           </ListItem>
         </Link>
 
-        <Link to="/edit-dashboard" className={classes.buttonLink}>
+        <Link
+          to="/edit-dashboard"
+          className={clsx(classes.buttonLink, classes.linkColor)}
+        >
           <ListItem button>
             <ListItemIcon>
               <EditOutlinedIcon color="primary" />

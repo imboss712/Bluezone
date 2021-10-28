@@ -16,11 +16,11 @@ import Modal from '../../ui/Modal/Modal';
 
 import DeleteModal from './ComponentHelper/MatchActions/MatchActionsHelper/DeleteModal';
 import MatchInfo from './ComponentHelper/MatchInfo/MatchInfo';
+import TournamentTabs from './ComponentHelper/TournamentTabs';
 const Error = lazy(() => import('../../ui/Error/Error'));
 const MatchActions = lazy(() =>
   import('./ComponentHelper/MatchActions/MatchActions')
 );
-const TabGroup = lazy(() => import('./ComponentHelper/TabGroup'));
 const ShortInfo = lazy(() => import('./ComponentHelper/ShortInfo/ShortInfo'));
 
 const useStyles = makeStyles((theme) => ({
@@ -120,14 +120,12 @@ const SingleMatch = (props) => {
               direction={isMobileScreen ? 'column-reverse' : 'row'}
             >
               <Grid item xs={12} sm={12} md={8}>
-                <Suspense fallback={<SuspenseLoading />}>
-                  <TabGroup
-                    id={tournament._id}
-                    teamType={tournament.teamType}
-                    entryFees={tournament.entryFees}
-                    matchStatus={tournament.matchStatus}
-                  />
-                </Suspense>
+                <TournamentTabs
+                  tournamentId={tournament._id}
+                  teamType={tournament.teamType}
+                  entryFees={tournament.entryFees}
+                  matchStatus={tournament.matchStatus}
+                />
               </Grid>
 
               <Grid item xs={12} sm={12} md={4}>

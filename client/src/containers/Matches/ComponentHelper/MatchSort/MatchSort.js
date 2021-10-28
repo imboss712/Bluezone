@@ -61,7 +61,7 @@ const MatchSort = (props) => {
           color="primary"
           size="small"
           className={classes.sortButton}
-          style={{ marginLeft: 'auto' }}
+          sx={{ marginLeft: 'auto' }}
           onClick={handleSetSortDate}
         >
           Date{' '}

@@ -46,7 +46,10 @@ const Profile = (props) => {
           variant="outlined"
           sx={{ marginTop: edit ? 2 : 4 }}
         >
-          <AccountBoxRoundedIcon className={sharedClasses.headingIcon} />
+          <AccountBoxRoundedIcon
+            color="primary"
+            className={sharedClasses.headingIcon}
+          />
 
           <Typography className={sharedClasses.headingText} variant="h5">
             <b>{edit ? 'Update Your Profile' : 'Create Your Profile'}</b>

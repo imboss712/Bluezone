@@ -64,7 +64,10 @@ const Feedbacks = (props) => {
           <BackButton link="/tournaments" text="Go To Tournaments" />
 
           <Paper className={sharedClasses.paper} variant="outlined">
-            <FeedbackRoundedIcon className={sharedClasses.headingIcon} />
+            <FeedbackRoundedIcon
+              color="primary"
+              className={sharedClasses.headingIcon}
+            />
             <Typography className={sharedClasses.headingText} variant="h5">
               <b>Users Feedback</b>
             </Typography>

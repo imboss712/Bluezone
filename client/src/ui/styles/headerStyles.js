@@ -7,6 +7,9 @@ const headerStyle = makeStyles((theme) => ({
   buttonLink: {
     textDecoration: 'none'
   },
+  linkColor: {
+    color: '#1976D2'
+  },
   expandIcon: {
     fontSize: theme.spacing(2),
     marginLeft: theme.spacing(0.5)
@@ -14,7 +17,7 @@ const headerStyle = makeStyles((theme) => ({
   avatar: {
     width: theme.spacing(3),
     height: theme.spacing(3),
-    backgroundColor: '#3f51b5'
+    backgroundColor: '#1976D2'
   },
   divider: {
     marginTop: theme.spacing(1),

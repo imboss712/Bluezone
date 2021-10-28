@@ -37,7 +37,10 @@ const Register = (props) => {
         />
 
         <Paper className={classes.paper} variant="outlined">
-          <PersonAddRoundedIcon className={classes.headingIcon} />
+          <PersonAddRoundedIcon
+            color="primary"
+            className={classes.headingIcon}
+          />
 
           <Typography className={classes.headingText} variant="h5">
             <b>{edit ? 'Update Account' : 'Register to Bluezone'}</b>
@@ -120,8 +123,16 @@ const Register = (props) => {
                         sx={{ fontSize: 14, color: 'text.secondary' }}
                       >
                         By signing up, you agree to our{' '}
-                        <Link to="/policy/terms-of-use">Terms of Use</Link> and{' '}
-                        <Link to="/policy/privacy">Privacy Policy</Link>
+                        <Link
+                          to="/policy/terms-of-use"
+                          style={{ color: '#1976D2' }}
+                        >
+                          Terms of Use
+                        </Link>{' '}
+                        and{' '}
+                        <Link to="/policy/privacy" style={{ color: '#1976D2' }}>
+                          Privacy Policy
+                        </Link>
                       </Typography>
                     </Box>
                   )}

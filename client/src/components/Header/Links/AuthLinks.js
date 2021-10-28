@@ -121,15 +121,24 @@ const AuthLinks = (props) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <Link to="/dashboard" className={classes.buttonLink}>
+        <Link
+          to="/dashboard"
+          className={clsx(classes.buttonLink, classes.linkColor)}
+        >
           <MenuItem onClick={handleClose}>My Profile</MenuItem>
         </Link>
 
-        <Link to="/wallet" className={classes.buttonLink}>
+        <Link
+          to="/wallet"
+          className={clsx(classes.buttonLink, classes.linkColor)}
+        >
           <MenuItem onClick={handleClose}>My Wallet</MenuItem>
         </Link>
 
-        <Link to="/edit-dashboard" className={classes.buttonLink}>
+        <Link
+          to="/edit-dashboard"
+          className={clsx(classes.buttonLink, classes.linkColor)}
+        >
           <MenuItem onClick={handleClose}>Edit Profile</MenuItem>
         </Link>
 

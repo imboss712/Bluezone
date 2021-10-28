@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#0D47A1',
     fontWeight: 'bold'
   },
-  bullet: {
+  starIcon: {
     fontSize: theme.spacing(2),
     color: 'rgba(0, 0, 0, 0.6)',
     verticalAlign: 'text-top',

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -15,7 +16,10 @@ const AdminLinks = () => {
 
   return (
     <>
-      <Link to="/host-tournament" className={classes.buttonLink}>
+      <Link
+        to="/host-tournament"
+        className={clsx(classes.buttonLink, classes.linkColor)}
+      >
         <ListItem button>
           <ListItemIcon>
             <AddCircleOutlineOutlinedIcon color="primary" />
@@ -24,7 +28,10 @@ const AdminLinks = () => {
         </ListItem>
       </Link>
 
-      <Link to="/withdrawal-requests" className={classes.buttonLink}>
+      <Link
+        to="/withdrawal-requests"
+        className={clsx(classes.buttonLink, classes.linkColor)}
+      >
         <ListItem button>
           <ListItemIcon>
             <MoneyOutlinedIcon color="primary" />
@@ -33,7 +40,10 @@ const AdminLinks = () => {
         </ListItem>
       </Link>
 
-      <Link to="/users-feedback" className={classes.buttonLink}>
+      <Link
+        to="/users-feedback"
+        className={clsx(classes.buttonLink, classes.linkColor)}
+      >
         <ListItem button>
           <ListItemIcon>
             <FeedbackOutlinedIcon color="primary" />

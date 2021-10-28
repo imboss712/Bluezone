@@ -21,7 +21,7 @@ const Rules = memo(() => {
             elevation={0}
             sx={{ marginBottom: 3 }}
           >
-            <Table sx={{ width: '100%' }} aria-label="rules-table">
+            <Table sx={{ width: 1 }} aria-label="rules-table">
               <TableHead>
                 <TableRow sx={{ backgroundColor: '#E3F2FD' }}>
                   <TableCell sx={{ color: '#0D47A1', fontWeight: 'bold' }}>

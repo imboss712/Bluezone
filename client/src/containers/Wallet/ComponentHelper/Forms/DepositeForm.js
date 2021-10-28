@@ -78,7 +78,7 @@ const DepositeForm = (props) => {
           onAddMoney({ amount: order.amount / 100 });
         }
       },
-      theme: { color: '#3f51b5' }
+      theme: { color: '#1976D2' }
     };
 
     const rzp1 = new window.Razorpay(options);

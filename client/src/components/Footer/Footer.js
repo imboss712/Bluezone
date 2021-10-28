@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'transparent'
   },
   linkTitle: {
-    color: 'white'
+    color: '#FFFFFF'
   },
   link: {
     color: '#FFFFFF',

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -13,7 +14,7 @@ const GuestLinks = () => {
 
   return (
     <div>
-      <Link to="/login" className={classes.buttonLink}>
+      <Link to="/login" className={clsx(classes.buttonLink, classes.linkColor)}>
         <ListItem button>
           <ListItemIcon>
             <LoginOutlinedIcon color="primary" />
@@ -22,7 +23,10 @@ const GuestLinks = () => {
         </ListItem>
       </Link>
 
-      <Link to="/register" className={classes.buttonLink}>
+      <Link
+        to="/register"
+        className={clsx(classes.buttonLink, classes.linkColor)}
+      >
         <ListItem button>
           <ListItemIcon>
             <PersonAddOutlinedIcon color="primary" />

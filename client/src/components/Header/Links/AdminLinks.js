@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import clsx from 'clsx';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -39,15 +40,24 @@ const AdminLinks = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <NavLink to="/host-tournament" className={classes.buttonLink}>
+        <NavLink
+          to="/host-tournament"
+          className={clsx(classes.buttonLink, classes.linkColor)}
+        >
           <MenuItem onClick={handleClose}>Host A Tournament</MenuItem>
         </NavLink>
 
-        <NavLink to="/withdrawal-requests" className={classes.buttonLink}>
+        <NavLink
+          to="/withdrawal-requests"
+          className={clsx(classes.buttonLink, classes.linkColor)}
+        >
           <MenuItem onClick={handleClose}>Withdrawal Requests</MenuItem>
         </NavLink>
 
-        <NavLink to="/users-feedback" className={classes.buttonLink}>
+        <NavLink
+          to="/users-feedback"
+          className={clsx(classes.buttonLink, classes.linkColor)}
+        >
           <MenuItem onClick={handleClose}>Feedbacks</MenuItem>
         </NavLink>
       </Menu>

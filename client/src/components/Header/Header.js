@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -45,12 +46,18 @@ const Header = (props) => {
         position="static"
         color="transparent"
         elevation={0}
-        sx={{ borderBottom: '1px solid #0000001f' }}
+        sx={{ borderBottom: 1, borderColor: 'divider' }}
       >
         <Container>
           <Toolbar className={classes.toolbar}>
             <Typography variant="h5" color="primary" className={classes.title}>
-              <Link to="/" className={sharedClasses.buttonLink}>
+              <Link
+                to="/"
+                className={clsx(
+                  sharedClasses.buttonLink,
+                  sharedClasses.linkColor
+                )}
+              >
                 <b>bluezone</b>
               </Link>
             </Typography>

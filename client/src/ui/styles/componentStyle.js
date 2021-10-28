@@ -13,6 +13,9 @@ const componentStyle = makeStyles((theme) => ({
   },
   text: {
     marginTop: theme.spacing(1.5)
+  },
+  linkColor: {
+    color: '#1976D2'
   }
 }));
 

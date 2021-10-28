@@ -68,6 +68,7 @@ const Withdrawals = (props) => {
 
           <Paper className={sharedClasses.paper} variant="outlined">
             <AccountBalanceWalletRoundedIcon
+              color="primary"
               className={sharedClasses.headingIcon}
             />
 

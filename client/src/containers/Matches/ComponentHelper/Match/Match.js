@@ -93,7 +93,7 @@ const Match = (props) => {
     <Box className={classes.root}>
       <Paper
         className={classes.paper}
-        style={{ borderTopColor: border }}
+        sx={{ borderTopColor: border }}
         variant="outlined"
       >
         <MatchStatus

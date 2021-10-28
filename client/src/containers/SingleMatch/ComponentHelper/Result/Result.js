@@ -76,7 +76,7 @@ const Result = (props) => {
                     ))}
                     <Box
                       className={classes.box}
-                      style={{
+                      sx={{
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center'

@@ -64,6 +64,7 @@ const Privacy = () => {
               target="_blank"
               rel="noopener noreferrer"
               href="mailto:care.bluezone@gmail.com"
+              style={{ color: '#1976D2' }}
             >
               care.bluezone@gmail.com
             </a>
@@ -276,6 +277,7 @@ const Privacy = () => {
               target="_blank"
               rel="noopener noreferrer"
               href="mailto:care.bluezone@gmail.com"
+              style={{ color: '#1976D2' }}
             >
               care.bluezone@gmail.com
             </a>{' '}

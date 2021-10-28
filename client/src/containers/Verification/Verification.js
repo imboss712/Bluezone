@@ -119,7 +119,10 @@ const Verification = (props) => {
           />
 
           <Paper className={sharedClasses.paper} variant="outlined">
-            <LockOpenOutlinedIcon className={sharedClasses.headingIcon} />
+            <LockOpenOutlinedIcon
+              color="primary"
+              className={sharedClasses.headingIcon}
+            />
 
             <Typography variant="h5" className={sharedClasses.headingText}>
               <b>Verification Code</b>

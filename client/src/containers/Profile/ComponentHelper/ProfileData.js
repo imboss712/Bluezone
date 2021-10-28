@@ -30,7 +30,7 @@ const TableLine = (props) => {
   return (
     <TableRow>
       <TableCell>{keyName}</TableCell>
-      <TableCell align="right" style={{ color: '#0d47a1' }}>
+      <TableCell align="right" sx={{ color: '#0D47A1' }}>
         {valueName}
       </TableCell>
     </TableRow>

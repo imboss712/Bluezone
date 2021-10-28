@@ -8,7 +8,7 @@ import 'react-circular-progressbar/dist/styles.css';
 const useStyles = makeStyles((theme) => ({
   progressBar: {
     padding: theme.spacing(3),
-    height: '120px',
+    height: theme.spacing(15),
     display: 'flex',
     justifyContent: 'center',
     textAlign: 'center'
@@ -34,8 +34,8 @@ const ParticipantCount = (props) => {
           text={`${count}/100`}
           strokeWidth={7}
           styles={buildStyles({
-            textColor: '#3f51b5',
-            pathColor: '#3f51b5'
+            textColor: '#1976D2',
+            pathColor: '#1976D2'
           })}
         />
       </Box>

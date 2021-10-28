@@ -63,7 +63,7 @@ const Modal = forwardRef((props, ref) => {
       ) : (
         <DialogActions className={classes.actionBox}>
           <Button
-            style={{ marginRight: '8px' }}
+            sx={{ marginRight: 1 }}
             onClick={() => setIsOpen(false)}
             color="primary"
           >

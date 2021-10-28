@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
     },
     borderRadius: theme.spacing(0.75),
     textAlign: 'center'
+  },
+  linkColor: {
+    color: '#1976D2'
   }
 }));
 
@@ -32,7 +35,10 @@ const FormNavigation = (props) => {
   return (
     <Paper className={classes.paper} variant="outlined">
       <Typography>
-        {text} <Link to={link}>{linkText}</Link>
+        {text}{' '}
+        <Link to={link} className={classes.linkColor}>
+          {linkText}
+        </Link>
       </Typography>
     </Paper>
   );

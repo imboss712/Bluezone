@@ -46,48 +46,59 @@ const Teamcode = (props) => {
     }, 1250);
   };
 
-  return <>
-    <Box className={classes.box}>
-      {copySuccess && (
-        <Typography style={{ color: 'green', margin: '0 0 12px 0' }}>
-          Copied to Clipboard!
-        </Typography>
-      )}
+  return (
+    <>
+      <Box className={classes.box}>
+        {copySuccess && (
+          <Typography
+            sx={{
+              color: 'green',
+              marginTop: 0,
+              marginBottom: 1.5,
+              marginLeft: 0,
+              marginRight: 0
+            }}
+          >
+            Copied to Clipboard!
+          </Typography>
+        )}
 
-      <TextField
-        variant="outlined"
-        name="teamCode"
-        type="text"
-        label="Teamcode"
-        value={teamCode}
-        readOnly
-        fullWidth
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <Tooltip
-                title="Share TeamCode"
-                enterDelay={500}
-                TransitionComponent={Zoom}
-                placement="top"
-                arrow
-              >
-                <IconButton
-                  aria-label="share-teamcode"
-                  color="primary"
-                  edge="end"
-                  onClick={copyTeamcode}
-                  style={{ marginRight: '0' }}
-                  size="large">
-                  <ShareRoundedIcon />
-                </IconButton>
-              </Tooltip>
-            </InputAdornment>
-          )
-        }}
-      />
-    </Box>
-  </>;
+        <TextField
+          variant="outlined"
+          name="teamCode"
+          type="text"
+          label="Teamcode"
+          value={teamCode}
+          readOnly
+          fullWidth
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Tooltip
+                  title="Share TeamCode"
+                  enterDelay={500}
+                  TransitionComponent={Zoom}
+                  placement="top"
+                  arrow
+                >
+                  <IconButton
+                    aria-label="share-teamcode"
+                    color="primary"
+                    edge="end"
+                    onClick={copyTeamcode}
+                    sx={{ marginRight: 0 }}
+                    size="large"
+                  >
+                    <ShareRoundedIcon />
+                  </IconButton>
+                </Tooltip>
+              </InputAdornment>
+            )
+          }}
+        />
+      </Box>
+    </>
+  );
 };
 
 export default Teamcode;
