@@ -6,8 +6,10 @@ import { Helmet } from 'react-helmet-async';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Formik, Form } from 'formik';
+import CircularProgress from '@mui/material/CircularProgress';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import makeStyles from '@mui/styles/makeStyles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -34,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(0.9)
     },
     fontWeight: 'bold'
+  },
+  loadingIcon: {
+    marginLeft: theme.spacing(1)
   }
 }));
 
@@ -169,14 +174,26 @@ const Verification = (props) => {
                     sx={{ display: 'flex', justifyContent: 'flex-start' }}
                   >
                     {timer === 0 ? (
-                      <SubmitButton
-                        variant="text"
-                        createText={isSmallScreen ? 'Resend' : 'Resend Code'}
-                        creatingText="Resending... "
-                        isSubmitting={resending}
+                      <Button
+                        size="large"
+                        color="primary"
                         disabled={timer === 0 ? false : true}
                         onClick={handleResend}
-                      />
+                      >
+                        {resending ? (
+                          <>
+                            Resending...{' '}
+                            <CircularProgress
+                              size={16}
+                              className={classes.loadingIcon}
+                            />
+                          </>
+                        ) : isSmallScreen ? (
+                          'Resend'
+                        ) : (
+                          'Resend Code'
+                        )}
+                      </Button>
                     ) : (
                       <Typography variant="body2" className={classes.timer}>
                         {isSmallScreen

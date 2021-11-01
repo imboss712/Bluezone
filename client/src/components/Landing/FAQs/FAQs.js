@@ -112,13 +112,13 @@ const FAQs = () => {
           })}
         </Box>
 
-        <Link to="/help/faqs" className={classes.linkButton}>
-          <Box className={classes.moreButton}>
+        <Box className={classes.moreButton}>
+          <Link to="/help/faqs" className={classes.linkButton}>
             <Button variant="outlined" color="primary" aria-label="More FAQs">
               More FAQs
             </Button>
-          </Box>
-        </Link>
+          </Link>
+        </Box>
 
         <Divider />
       </Container>
