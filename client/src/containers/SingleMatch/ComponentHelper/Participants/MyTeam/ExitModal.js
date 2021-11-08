@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import makeStyles from '@mui/styles/makeStyles';
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 const ExitModal = (props) => {
   const classes = useStyles();
 
-  const { entryFees, onGetUser, user, title } = props;
+  const { entryFees, discountPercent, onGetUser, user, title } = props;
 
   useEffect(() => {
     onGetUser();
@@ -40,7 +41,7 @@ const ExitModal = (props) => {
             </Typography>
 
             <Typography color="secondary" sx={{ marginLeft: 'auto' }}>
-              <b>Rs. {user.amount}</b>
+              <b>₹{user.amount}</b>
             </Typography>
           </Box>
 
@@ -53,9 +54,17 @@ const ExitModal = (props) => {
           <b>Refund Amount:</b>
         </Typography>
 
-        <Typography sx={{ marginLeft: 'auto' }}>
-          <b>Rs. {entryFees * 0.9}</b>
-        </Typography>
+        <Stack sx={{ marginLeft: 'auto' }} direction="row" spacing={1}>
+          <Typography>
+            <b>₹{(entryFees - (entryFees * discountPercent) / 100) * 0.9}</b>
+          </Typography>
+
+          {entryFees === 0 || discountPercent === 0 ? null : (
+            <Typography variant="body2" sx={{ alignSelf: 'flex-end' }}>
+              <del>₹{entryFees * 0.9}</del>
+            </Typography>
+          )}
+        </Stack>
       </Box>
 
       <Divider />

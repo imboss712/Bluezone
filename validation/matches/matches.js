@@ -14,6 +14,7 @@ const {
 const { serverInput } = require('./matchValidationHelper/serverValidation');
 const { mapInput } = require('./matchValidationHelper/mapValidation');
 const { entryInput } = require('./matchValidationHelper/entryValidation');
+const { discountInput } = require('./matchValidationHelper/discountValidation');
 
 // Create match validation
 const validateCreateMatchInput = (input) => {
@@ -25,6 +26,7 @@ const validateCreateMatchInput = (input) => {
   const { serverErrors } = serverInput(input.server);
   const { mapErrors } = mapInput(input.map);
   const { entryErrors } = entryInput(input.entryFees);
+  const { discountErrors } = discountInput(input.discountPercent);
 
   const errors = [
     ...titleErrors,
@@ -34,7 +36,8 @@ const validateCreateMatchInput = (input) => {
     ...perspectiveErrors,
     ...serverErrors,
     ...mapErrors,
-    ...entryErrors
+    ...entryErrors,
+    ...discountErrors
   ];
 
   return { errors, isValid: isEmpty(errors) };

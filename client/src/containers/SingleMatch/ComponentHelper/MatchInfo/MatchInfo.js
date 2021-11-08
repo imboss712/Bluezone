@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import makeStyles from '@mui/styles/makeStyles';
 
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 const DataGrid = (props) => {
   const classes = useStyles();
 
-  const { title, value } = props;
+  const { title, value, secondaryValue } = props;
 
   return (
     <Box className={classes.datagrid}>
@@ -41,7 +42,22 @@ const DataGrid = (props) => {
         <b>{title}</b>
       </Typography>
 
-      <Typography sx={{ marginTop: 1, color: '#C0C0C0' }}>{value}</Typography>
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{ marginTop: 1, justifyContent: 'center' }}
+      >
+        <Typography sx={{ color: '#C0C0C0' }}>{value}</Typography>
+
+        {secondaryValue ? (
+          <Typography
+            variant="body2"
+            sx={{ color: '#C0C0C0', alignSelf: 'flex-end' }}
+          >
+            <del>{secondaryValue}</del>
+          </Typography>
+        ) : null}
+      </Stack>
     </Box>
   );
 };
@@ -58,6 +74,7 @@ const MatchInfo = memo((props) => {
     map,
     server,
     entryFees,
+    discountPercent,
     prizePool
   } = props;
 
@@ -66,6 +83,14 @@ const MatchInfo = memo((props) => {
 
   const formattedMatchDate = format(new Date(newMatchDate), 'dd MMM yyyy');
   const formattedMatchTime = format(new Date(newMatchTime), 'hh:mm aa');
+
+  const discountedEntryFees =
+    entryFees - (entryFees * discountPercent) / 100 === 0
+      ? 'Free'
+      : `₹ ${entryFees - (entryFees * discountPercent) / 100}`;
+
+  const originalEntryFees =
+    discountPercent === 0 || entryFees === 0 ? null : `₹${entryFees}`;
 
   const tournamentData = [
     {
@@ -101,12 +126,13 @@ const MatchInfo = memo((props) => {
     {
       id: 7,
       title: 'Entry Fees',
-      value: `Rs. ${entryFees}`
+      value: discountedEntryFees,
+      secondaryValue: originalEntryFees
     },
     {
       id: 8,
       title: 'Prize Pool',
-      value: `Rs. ${prizePool}`
+      value: `₹ ${prizePool}`
     }
   ];
 
@@ -126,7 +152,11 @@ const MatchInfo = memo((props) => {
                 key={data.id}
                 className={classes.gridBox}
               >
-                <DataGrid title={data.title} value={data.value} />
+                <DataGrid
+                  title={data.title}
+                  value={data.value}
+                  secondaryValue={data.secondaryValue}
+                />
               </Grid>
             );
           })}

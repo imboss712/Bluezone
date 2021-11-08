@@ -34,6 +34,7 @@ router.post('/matches/:id/create-team', auth, isHonest, async (req, res) => {
       matchTime: 1,
       teamType: 1,
       entryFees: 1,
+      discountPercent: 1,
       participantStatus: 1,
       participants: 1
     });
@@ -50,7 +51,10 @@ router.post('/matches/:id/create-team', auth, isHonest, async (req, res) => {
       });
     }
 
-    if (req.user.amount < match.entryFees) {
+    if (
+      req.user.amount <
+      match.entryFees - (match.entryFees * match.discountPercent) / 100
+    ) {
       return res
         .status(400)
         .send({ errors: [{ msg: 'Insufficient money in your account' }] });
@@ -108,7 +112,8 @@ router.post('/matches/:id/create-team', auth, isHonest, async (req, res) => {
 
     team.players = team.players.concat(player);
 
-    req.user.amount -= match.entryFees;
+    req.user.amount -=
+      match.entryFees - (match.entryFees * match.discountPercent) / 100;
 
     const newMatchDate = format(new Date(match.matchDate), 'yyyy-MM-dd');
     const newMatchTime = `${newMatchDate} ${match.matchTime}`;
@@ -130,7 +135,8 @@ router.post('/matches/:id/create-team', auth, isHonest, async (req, res) => {
     }
 
     const transaction = new Transaction({
-      paymentAmount: match.entryFees,
+      paymentAmount:
+        match.entryFees - (match.entryFees * match.discountPercent) / 100,
       user: req.user._id
     });
 
@@ -171,6 +177,7 @@ router.post('/matches/:id/join-team', auth, isHonest, async (req, res) => {
       matchDate: 1,
       matchTime: 1,
       teamType: 1,
+      discountPercent: 1,
       entryFees: 1,
       participantStatus: 1,
       participants: 1
@@ -187,7 +194,10 @@ router.post('/matches/:id/join-team', auth, isHonest, async (req, res) => {
       });
     }
 
-    if (req.user.amount < match.entryFees) {
+    if (
+      req.user.amount <
+      match.entryFees - (match.entryFees * match.discountPercent) / 100
+    ) {
       return res
         .status(400)
         .send({ errors: [{ msg: 'Insufficient money in your account' }] });
@@ -238,7 +248,8 @@ router.post('/matches/:id/join-team', auth, isHonest, async (req, res) => {
     };
 
     team.players = team.players.concat(player);
-    req.user.amount -= match.entryFees;
+    req.user.amount -=
+      match.entryFees - (match.entryFees * match.discountPercent) / 100;
 
     const newMatchDate = format(new Date(match.matchDate), 'yyyy-MM-dd');
     const newMatchTime = `${newMatchDate} ${match.matchTime}`;
@@ -260,7 +271,8 @@ router.post('/matches/:id/join-team', auth, isHonest, async (req, res) => {
     }
 
     const transaction = new Transaction({
-      paymentAmount: match.entryFees,
+      paymentAmount:
+        match.entryFees - (match.entryFees * match.discountPercent) / 100,
       user: req.user._id
     });
 
@@ -292,6 +304,7 @@ router.delete('/matches/:id/remove-team', auth, isHonest, async (req, res) => {
   try {
     const match = await Match.findById(req.params.id).select({
       entryFees: 1,
+      discountPercent: 1,
       matchStatus: 1,
       participantStatus: 1,
       participants: 1
@@ -328,14 +341,18 @@ router.delete('/matches/:id/remove-team', auth, isHonest, async (req, res) => {
 
     team.players.forEach(async (p) => {
       const user = await User.findById(p.playerId);
-      user.amount += match.entryFees * 0.9;
+      user.amount +=
+        (match.entryFees - (match.entryFees * match.discountPercent) / 100) *
+        0.9;
 
       const transaction = new Transaction({
         from: 'Bluezone',
         to: 'Wallet',
         type: 'Credited',
         subType: 'Refund',
-        paymentAmount: match.entryFees * 0.9,
+        paymentAmount:
+          (match.entryFees - (match.entryFees * match.discountPercent) / 100) *
+          0.9,
         user: user._id
       });
 
@@ -362,6 +379,7 @@ router.post('/matches/:id/leave-team', auth, isHonest, async (req, res) => {
   try {
     const match = await Match.findById(req.params.id).select({
       entryFees: 1,
+      discountPercent: 1,
       matchStatus: 1,
       participantStatus: 1,
       participants: 1
@@ -405,7 +423,8 @@ router.post('/matches/:id/leave-team', auth, isHonest, async (req, res) => {
       await team.save();
     }
 
-    req.user.amount += match.entryFees * 0.9;
+    req.user.amount +=
+      (match.entryFees - (match.entryFees * match.discountPercent) / 100) * 0.9;
 
     match.participants -= 1;
 
@@ -418,7 +437,9 @@ router.post('/matches/:id/leave-team', auth, isHonest, async (req, res) => {
       to: 'Wallet',
       type: 'Credited',
       subType: 'Refund',
-      paymentAmount: match.entryFees * 0.9,
+      paymentAmount:
+        (match.entryFees - (match.entryFees * match.discountPercent) / 100) *
+        0.9,
       user: req.user._id
     });
 
@@ -448,6 +469,7 @@ router.post(
     try {
       const match = await Match.findById(req.params.id).select({
         entryFees: 1,
+        discountPercent: 1,
         matchStatus: 1,
         participantStatus: 1,
         participants: 1
@@ -495,7 +517,9 @@ router.post(
       );
 
       const user = await User.findById(req.params.teammateId);
-      user.amount += match.entryFees * 0.9;
+      user.amount +=
+        (match.entryFees - (match.entryFees * match.discountPercent) / 100) *
+        0.9;
 
       match.participants -= 1;
 
@@ -508,7 +532,9 @@ router.post(
         to: 'Wallet',
         type: 'Credited',
         subType: 'Refund',
-        paymentAmount: match.entryFees * 0.9,
+        paymentAmount:
+          (match.entryFees - (match.entryFees * match.discountPercent) / 100) *
+          0.9,
         user: user._id
       });
 

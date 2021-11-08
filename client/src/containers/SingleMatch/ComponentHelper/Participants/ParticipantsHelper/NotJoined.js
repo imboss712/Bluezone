@@ -23,6 +23,7 @@ const NotJoined = (props) => {
     user,
     tournamentId,
     entryFees,
+    discountPercent,
     participantStatus,
     onCreateTeam,
     onJoinTeam
@@ -41,7 +42,8 @@ const NotJoined = (props) => {
 
     setModalProps({
       title: 'Create Team',
-      noAction: (user && user.amount) < entryFees,
+      noAction:
+        (user && user.amount) < entryFees - (entryFees * discountPercent) / 100,
       noActionText:
         'Insufficient balance! Please go to wallet, add cash and then create/join team.',
       confirmText: 'Pay and Create Team',
@@ -59,7 +61,8 @@ const NotJoined = (props) => {
 
     setModalProps({
       title: 'Join Team',
-      noAction: (user && user.amount) < entryFees,
+      noAction:
+        (user && user.amount) < entryFees - (entryFees * discountPercent) / 100,
       noActionText:
         'Insufficient balance! Please go to wallet, add cash and then create/join team.',
       confirmText: 'Pay and Join Team',
@@ -155,7 +158,7 @@ const NotJoined = (props) => {
         confirmText={modalProps.confirmText}
         onConfirmClick={modalProps.onConfirmClick}
       >
-        <WalletModal entryFees={entryFees} />
+        <WalletModal entryFees={entryFees} discountPercent={discountPercent} />
       </Modal>
     </>
   );

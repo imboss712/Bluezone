@@ -25,6 +25,7 @@ import {
   serverItems,
   mapItems,
   entryItems,
+  discountItems,
   prizePoolItems,
   validationSchema
 } from './FormHelper/index';
@@ -211,6 +212,20 @@ const Match = (props) => {
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
+                      <FormikSelect
+                        name="discountPercent"
+                        items={discountItems}
+                        label="Discount"
+                        error={
+                          errors.discountPercent && touched.discountPercent
+                            ? true
+                            : false
+                        }
+                        disabled={isSubmitting || edit ? true : false}
+                      />
+                    </Grid>
+
+                    <Grid item xs={12}>
                       <Field
                         as={TextField}
                         type="text"

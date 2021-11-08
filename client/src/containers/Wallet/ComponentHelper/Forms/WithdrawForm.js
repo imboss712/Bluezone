@@ -33,7 +33,7 @@ const WithdrawForm = (props) => {
         <Suspense>
           <Error
             status="400"
-            statusText="Keep winning and withdraw your winnings once they exceed Rs. 200"
+            statusText="Keep winning and withdraw your winnings once they exceed ₹ 200"
             hideImage
             hideButton
           />
@@ -73,7 +73,7 @@ const WithdrawForm = (props) => {
                       disabled={isSubmitting}
                       InputProps={{
                         startAdornment: (
-                          <InputAdornment position="start">Rs.</InputAdornment>
+                          <InputAdornment position="start">₹</InputAdornment>
                         )
                       }}
                       autoComplete="off"

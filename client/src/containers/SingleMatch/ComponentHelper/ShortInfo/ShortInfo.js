@@ -38,6 +38,7 @@ const ShortInfo = (props) => {
     tournamentId,
     participantStatus,
     entryFees,
+    discountPercent,
     participants,
     user,
     matchStatus
@@ -81,7 +82,7 @@ const ShortInfo = (props) => {
       <Box variant="outlined" className={classes.statusText}>
         <Typography variant="body2" color="textSecondary">
           {matchStatus === 'Open' && participantStatus === 'Full'
-            ? 'Participant list is FUll.'
+            ? 'Participant list is Full.'
             : statusPara}
         </Typography>
       </Box>
@@ -97,6 +98,7 @@ const ShortInfo = (props) => {
           <MyTeam
             tournamentId={tournamentId}
             participantStatus={participantStatus}
+            discountPercent={discountPercent}
             entryFees={entryFees}
           />
         </Suspense>

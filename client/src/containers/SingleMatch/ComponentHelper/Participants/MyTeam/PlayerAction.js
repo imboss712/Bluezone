@@ -43,6 +43,7 @@ const PlayerAction = (props) => {
     participantStatus,
     profile,
     label,
+    discountPercent,
     entryFees,
     AmILeader,
     onRemoveMember
@@ -129,7 +130,11 @@ const PlayerAction = (props) => {
         confirmText={modalProps.confirmText}
         onConfirmClick={modalProps.onConfirmClick}
       >
-        <ExitModal title={modalProps.title} entryFees={entryFees} />
+        <ExitModal
+          title={modalProps.title}
+          entryFees={entryFees}
+          discountPercent={discountPercent}
+        />
       </Modal>
     </>
   );

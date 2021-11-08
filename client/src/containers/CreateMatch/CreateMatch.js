@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet-async';
 
 import * as actions from '../../store/actions/index';
 
-import { entryItems, prizePoolItems } from './FormHelper/index';
+import { entryItems, discountItems, prizePoolItems } from './FormHelper/index';
 import Match from './Match';
 
 const CreateMatch = (props) => {
@@ -19,9 +19,10 @@ const CreateMatch = (props) => {
     perspective: 'TPP',
     server: 'India',
     map: 'Erangel',
-    entryFees: entryItems[1].value,
+    entryFees: entryItems[2].value,
+    discountPercent: discountItems[0].value,
     prizePool:
-      entryItems[1].value *
+      entryItems[2].value *
       100 *
       prizePoolItems.find((pp) => pp.type === 'Squad').value
   };

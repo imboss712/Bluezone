@@ -51,7 +51,7 @@ const Withdrawal = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={fetchBank ? 6 : 4}>
-          <Typography variant="h6">Rs. {requestedAmount}</Typography>
+          <Typography variant="h6">₹ {requestedAmount}</Typography>
         </Grid>
 
         {!fetchBank && (

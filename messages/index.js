@@ -70,7 +70,7 @@ const sendMatchResult = (phone, name, kill, position, winning) => {
   client.messages
     .create({
       body: `Hello ${name}, the tournament is over. you score
-      ${position} position and ${kill} kill(s) and your winning amount is Rs. ${winning} has been credited to your wallet.`,
+      ${position} position and ${kill} kill(s) and your winning amount is ₹ ${winning} has been credited to your wallet.`,
       from: twilioSmsPhoneNumber,
       to: `+91${phone}`
     })

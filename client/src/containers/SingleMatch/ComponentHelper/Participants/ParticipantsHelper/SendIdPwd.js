@@ -66,7 +66,7 @@ const SendIdPwd = (props) => {
 
             <Box className={sharedClasses.box}>
               <SubmitButton
-                createText="Send Room-Id Password"
+                createText="Send Room Id Pwd"
                 creatingText="Sending..."
                 isSubmitting={isSubmitting}
                 disabled={

@@ -196,6 +196,13 @@ router.patch('/me', auth, async (req, res) => {
     req.user.name = name;
     req.user.dob = dob;
 
+    const diff = intervalToDuration({
+      start: new Date(dob),
+      end: new Date()
+    });
+
+    req.user.isAllowed = diff.years > 18;
+
     await req.user.save();
 
     res.send(req.user);

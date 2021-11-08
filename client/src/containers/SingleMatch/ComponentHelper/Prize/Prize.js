@@ -59,7 +59,7 @@ const Prize = memo((props) => {
               return (
                 <TableRow key={p.position}>
                   <TableCell>{p.position}</TableCell>
-                  <TableCell align="right">Rs. {p.prize}</TableCell>
+                  <TableCell align="right">₹ {p.prize}</TableCell>
                 </TableRow>
               );
             })}
@@ -76,7 +76,7 @@ const Prize = memo((props) => {
               </TableCell>
 
               <TableCell align="right" className={classes.tableCell}>
-                Rs. {0.2 * entry}
+                ₹ {0.2 * entry}
               </TableCell>
             </TableRow>
           </TableHead>

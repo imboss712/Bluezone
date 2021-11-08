@@ -21,10 +21,20 @@ const mapItems = [
 ];
 
 const entryItems = [
-  { label: 'Rs. 25', value: 25 },
-  { label: 'Rs. 50', value: 50 },
-  { label: 'Rs. 75', value: 75 },
-  { label: 'Rs. 100', value: 100 }
+  { label: '₹ 0', value: 0 },
+  { label: '₹ 10', value: 10 },
+  { label: '₹ 25', value: 25 },
+  { label: '₹ 50', value: 50 },
+  { label: '₹ 75', value: 75 },
+  { label: '₹ 100', value: 100 }
+];
+
+const discountItems = [
+  { label: '0%', value: 0 },
+  { label: '25%', value: 25 },
+  { label: '50%', value: 50 },
+  { label: '75%', value: 75 },
+  { label: '100%', value: 100 }
 ];
 
 const prizePoolItems = [
@@ -63,6 +73,9 @@ const validationSchema = Yup.object({
   entryFees: Yup.number()
     .required('Required')
     .oneOf(entryItems.map((e) => e.value)),
+  discountPercent: Yup.number()
+    .required('Required')
+    .oneOf(discountItems.map((e) => e.value)),
   prizePool: Yup.number().required('Required')
 });
 
@@ -72,6 +85,7 @@ export {
   serverItems,
   mapItems,
   entryItems,
+  discountItems,
   prizePoolItems,
   validationSchema
 };

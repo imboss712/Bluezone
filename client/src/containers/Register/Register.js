@@ -106,7 +106,7 @@ const Register = (props) => {
                       name="phone"
                       label="Mobile Number"
                       error={touched.phone && errors.phone ? true : false}
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || edit}
                     />
                   </Box>
 

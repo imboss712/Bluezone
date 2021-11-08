@@ -107,28 +107,27 @@ export const createMatch = (matchData, history) => async (dispatch) => {
 };
 
 // Update a Match
-export const updateMatch = (matchId, matchData, history) => async (
-  dispatch
-) => {
-  try {
-    const res = await api.patch(`/matches/${matchId}`, matchData);
+export const updateMatch =
+  (matchId, matchData, history) => async (dispatch) => {
+    try {
+      const res = await api.patch(`/matches/${matchId}`, matchData);
 
-    dispatch({
-      type: UPDATE_MATCH,
-      payload: res.data
-    });
+      dispatch({
+        type: UPDATE_MATCH,
+        payload: res.data
+      });
 
-    dispatch(setAlert('Match updated successfully', 'success'));
-    history.push(`/tournaments/${matchId}`);
-  } catch (err) {
-    const errors = err.response.data.errors;
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
-    } else {
-      dispatch(setAlert('Failed to update match', 'error'));
+      dispatch(setAlert('Match updated successfully', 'success'));
+      history.push(`/tournaments/${matchId}`);
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+      } else {
+        dispatch(setAlert('Failed to update match', 'error'));
+      }
     }
-  }
-};
+  };
 
 // Send tournament room id and pwd
 export const sendRoomIdPwd = (matchId, roomData) => async (dispatch) => {

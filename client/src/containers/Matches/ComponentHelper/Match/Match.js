@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import makeStyles from '@mui/styles/makeStyles';
@@ -26,12 +27,12 @@ const useStyles = makeStyles((theme) => ({
     borderTop: '8px solid'
   },
   box: {
-    margin: theme.spacing(3, 4, 1, 4),
+    margin: theme.spacing(3, 4, 0, 4),
     [theme.breakpoints.down('md')]: {
-      margin: theme.spacing(3, 3, 1, 3)
+      margin: theme.spacing(3, 3, 0, 3)
     },
     [theme.breakpoints.down('sm')]: {
-      margin: theme.spacing(3, 1.5, 1, 1.5)
+      margin: theme.spacing(3, 1.5, 0, 1.5)
     },
     textAlign: 'center'
   },
@@ -49,29 +50,43 @@ const useStyles = makeStyles((theme) => ({
   },
   titleText: {
     color: theme.palette.text.secondary,
-    marginBottom: theme.spacing(2),
     fontSize: theme.spacing(2.25),
     whiteSpace: 'nowrap'
   },
   valueText: {
-    color: 'black',
+    color: '#000000',
     fontSize: theme.spacing(2.15),
     whiteSpace: 'nowrap'
+  },
+  secondaryValueText: {
+    color: '#000000',
+    whiteSpace: 'nowrap',
+    alignSelf: 'flex-end'
   }
 }));
 
 const DataGrid = (props) => {
   const classes = useStyles();
 
-  const { title, value } = props;
+  const { title, value, secondaryValue, strike } = props;
 
   return (
     <section className={classes.section}>
-      <Typography className={classes.titleText}>
-        <b>{title}</b>
-      </Typography>
+      <Stack spacing={1.75}>
+        <Typography className={classes.titleText}>
+          <b>{title}</b>
+        </Typography>
 
-      <Typography className={classes.valueText}>{value}</Typography>
+        <Stack direction="row" spacing={1}>
+          <Typography className={classes.valueText}>{value}</Typography>
+
+          {secondaryValue ? (
+            <Typography variant="body2" className={classes.secondaryValueText}>
+              {strike ? <del>{secondaryValue}</del> : secondaryValue}
+            </Typography>
+          ) : null}
+        </Stack>
+      </Stack>
     </section>
   );
 };
@@ -108,21 +123,43 @@ const Match = (props) => {
         <Grid container spacing={6}>
           <Grid item xs={6}>
             <DataGrid title="Date" value={formattedMatchDate} />
-            <DataGrid title="Type" value={match.teamType} />
-            <DataGrid title="Map" value={match.map} />
-            <DataGrid title="Entry" value={`Rs. ${match.entryFees}`} />
             <DataGrid
-              title="Participants"
-              value={`${match.participants} / 100`}
+              title="Type"
+              value={match.teamType}
+              secondaryValue={match.perspective}
+            />
+            <DataGrid
+              title="Entry"
+              value={
+                match.entryFees -
+                  (match.entryFees * match.discountPercent) / 100 ===
+                0
+                  ? 'Free'
+                  : `₹${
+                      match.entryFees -
+                      (match.entryFees * match.discountPercent) / 100
+                    }`
+              }
+              secondaryValue={
+                match.discountPercent === 0 || match.entryFees === 0
+                  ? null
+                  : `₹${match.entryFees}`
+              }
+              strike={
+                match.discountPercent === 0 || match.entryFees === 0
+                  ? false
+                  : true
+              }
             />
           </Grid>
 
           <Grid item xs={6}>
             <DataGrid title="Time" value={formattedMatchTime} />
-            <DataGrid title="Perspective" value={match.perspective} />
-            <DataGrid title="Server" value={match.server} />
-            <DataGrid title="Prize" value={`Rs. ${match.prizePool}`} />
-            <DataGrid title="Venue" value="Online" />
+            <DataGrid title="Map" value={match.map} />
+            <DataGrid
+              title="Prize"
+              value={match.prizePool === 0 ? 'No Prize' : `₹${match.prizePool}`}
+            />
           </Grid>
         </Grid>
 

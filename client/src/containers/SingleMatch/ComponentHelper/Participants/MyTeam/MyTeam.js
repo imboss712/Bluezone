@@ -53,6 +53,7 @@ const MyTeam = memo((props) => {
     tournamentId,
     participantStatus,
     entryFees,
+    discountPercent,
     user,
     team: { loadingTeam, team },
     onGetTeam,
@@ -128,6 +129,7 @@ const MyTeam = memo((props) => {
           <NotJoined
             tournamentId={tournamentId}
             entryFees={entryFees}
+            discountPercent={discountPercent}
             participantStatus={participantStatus}
           />
         </Suspense>
@@ -199,7 +201,11 @@ const MyTeam = memo((props) => {
         confirmText={modalProps.confirmText}
         onConfirmClick={modalProps.onConfirmClick}
       >
-        <ExitModal title={modalProps.title} entryFees={entryFees} />
+        <ExitModal
+          title={modalProps.title}
+          entryFees={entryFees}
+          discountPercent={discountPercent}
+        />
       </Modal>
     </>
   );

@@ -38,9 +38,15 @@ const matchSchema = new mongoose.Schema(
     },
     entryFees: {
       type: Number,
-      min: 25,
+      min: 0,
       max: 250,
       required: true
+    },
+    discountPercent: {
+      type: Number,
+      min: 0,
+      max: 100,
+      default: 0
     },
     prizePool: {
       type: Number,

@@ -145,7 +145,7 @@ const DepositeForm = (props) => {
                   disabled={isSubmitting}
                   InputProps={{
                     startAdornment: (
-                      <InputAdornment position="start">Rs.</InputAdornment>
+                      <InputAdornment position="start">₹</InputAdornment>
                     )
                   }}
                   autoComplete="off"

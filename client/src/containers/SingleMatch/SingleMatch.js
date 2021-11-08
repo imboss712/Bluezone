@@ -108,6 +108,7 @@ const SingleMatch = (props) => {
             map={tournament.map}
             server={tournament.server}
             entryFees={tournament.entryFees}
+            discountPercent={tournament.discountPercent}
             prizePool={tournament.prizePool}
           />
         </Box>
@@ -134,6 +135,7 @@ const SingleMatch = (props) => {
                     tournamentId={tournament._id}
                     participantStatus={tournament.participantStatus}
                     entryFees={tournament.entryFees}
+                    discountPercent={tournament.discountPercent}
                     matchStatus={tournament.matchStatus}
                     participationStatus={tournament.participationStatus}
                     participants={tournament.participants}
